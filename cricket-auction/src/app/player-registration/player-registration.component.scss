@@ -1,0 +1,226 @@
+/* Custom Properties */
+$primary-dark: #0A192F;
+$secondary-blue: #00A3FF;
+$accent-gold: #FFC72C;
+$light-text: #F0F0F0;
+$error-red: #FF4444;
+
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Full-screen dark, slightly gradient background */
+    background: linear-gradient(135deg, $primary-dark 0%, #06101E 100%);
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Container and Title Styling --- */
+.registration-container {
+    background-color: rgba(18, 30, 48, 0.95); /* Semi-transparent dark card */
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 650px;
+    width: 100%;
+    /* Extra-ordinary shadow with a blue glow effect */
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.5), 
+        0 0 100px rgba($secondary-blue, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.title {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: $accent-gold;
+    text-align: center;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px rgba($accent-gold, 0.5);
+}
+
+.subtitle {
+    text-align: center;
+    color: $light-text;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+/* --- Form and Input Styling --- */
+.registration-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.form-group {
+    width: 100%;
+    position: relative;
+    
+    &.half-width {
+        flex-basis: calc(50% - 10px);
+    }
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: $light-text;
+}
+
+input:not([type="file"]), select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #1E2D4A;
+    border-radius: 8px;
+    background-color: #1E2D4A;
+    color: $light-text;
+    font-size: 1em;
+    transition: all 0.3s ease;
+
+    &:focus {
+        outline: none;
+        background-color: #273A5C;
+        border-color: $secondary-blue;
+        box-shadow: 0 0 10px rgba($secondary-blue, 0.5);
+    }
+    
+    /* Angular invalid class styling */
+    &.ng-invalid.ng-touched {
+        border-color: $error-red;
+        box-shadow: 0 0 5px rgba($error-red, 0.5);
+    }
+}
+
+/* --- Dropdown Styling Fix --- */
+.select-wrapper {
+    position: relative; /* Container to hold select and custom arrow */
+}
+
+select {
+    appearance: none; /* Remove default arrow/styling in most browsers */
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    background-image: none; 
+    cursor: pointer;
+    padding-right: 35px; /* Space for the custom arrow */
+}
+
+.dropdown-arrow {
+    position: absolute;
+    top: 50%; 
+    right: 15px;
+    /* Adjust position to be vertically centered within the select box */
+    transform: translateY(-50%); 
+    pointer-events: none; /* Allows user to click select beneath the arrow */
+    color: $accent-gold;
+    font-size: 0.7em;
+    z-index: 10;
+}
+
+
+/* --- Image Upload Styling --- */
+.image-upload-group input[type="file"] {
+    display: none;
+}
+
+.image-label {
+    cursor: pointer;
+    background: $secondary-blue;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    transition: background 0.3s ease, transform 0.2s;
+    width: 100%;
+    display: block; 
+    
+    &:hover {
+        background: darken($secondary-blue, 10%);
+        transform: translateY(-1px);
+    }
+}
+
+.image-preview {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed $accent-gold;
+    border-radius: 10px;
+    margin: 15px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.3s;
+}
+
+.preview-text {
+    color: $accent-gold;
+    font-size: 0.9em;
+    text-align: center;
+    padding: 10px;
+}
+
+/* --- Error Styling --- */
+.error-message {
+    color: $error-red;
+    font-size: 0.85em;
+    margin-top: 5px;
+    min-height: 1.2em; /* Reserve space to prevent layout jump */
+}
+
+/* --- Submit Button Styling --- */
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, $accent-gold, #FFA500);
+    color: $primary-dark;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 5px 15px rgba($accent-gold, 0.4);
+
+    &:hover:not([disabled]) {
+        background: linear-gradient(90deg, #FFA500, $accent-gold);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba($accent-gold, 0.6);
+    }
+    
+    /* Disabled state styling */
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+        box-shadow: none;
+        transform: none;
+    }
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 650px) {
+    .registration-container {
+        padding: 25px 15px;
+        border-radius: 15px;
+    }
+
+    .title {
+        font-size: 2em;
+    }
+
+    .form-group.half-width {
+        flex-basis: 100%; /* Make side-by-side fields stack on small screens */
+    }
+
+    .registration-form {
+        gap: 15px;
+    }
+}
+
+.swal-custom-popup{
+    background-color: #06101E;
+}

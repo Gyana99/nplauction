@@ -1,1 +1,55 @@
 /* You can add global styles to this file, and also import other style files */
+/* --- Global SweetAlert2 Styling (to match dark theme) --- */
+
+$secondary-blue: #00A3FF;
+$accent-gold: #FFC72C;
+$light-text: #F0F0F0;
+$error-red: #FF4444;
+
+
+/* Targets the main SweetAlert popup box */
+.swal2-popup.swal-custom-popup {
+    /* **THIS IS THE BACKGROUND FIX** */
+    background-color: #1E2D4A !important; 
+    
+    color: $light-text !important; /* White text for contrast */
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba($secondary-blue, 0.5); 
+    border: 1px solid rgba($secondary-blue, 0.3);
+    font-family: 'Poppins', sans-serif !important;
+}
+
+/* Targets the title of the alert */
+.swal2-title {
+    color: $accent-gold !important; /* Gold title for emphasis */
+    font-weight: 700;
+}
+
+/* Targets the main message/content area */
+.swal2-html-container {
+    color: $light-text !important;
+}
+
+/* Targets the Error Icon styling (red color) */
+.swal2-icon.swal2-error {
+    border-color: $error-red !important;
+}
+
+.swal2-icon.swal2-error [class^=swal2-x-mark-line] {
+    background-color: $error-red !important;
+}
+
+/* Targets the Confirm Button */
+.swal2-confirm.swal-custom-button {
+    background-color: $secondary-blue !important; 
+    color: $light-text !important;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 10px 20px;
+    transition: background-color 0.2s, transform 0.2s;
+
+    &:hover {
+        background-color: darken($secondary-blue, 10%) !important;
+        transform: translateY(-1px);
+    }
+}

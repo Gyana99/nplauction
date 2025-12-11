@@ -1,0 +1,80 @@
+<div class="registration-container">
+    <h1 class="title">The Auction Spotlight Registration</h1>
+    <p class="subtitle">Secure your place in the next big cricket auction.</p>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
+
+        <div class="form-group image-upload-group">
+            <label for="playerImage" class="image-label">
+                <span class="upload-text">Upload Player Photo (JPG, PNG, JPEG, max 5MB)</span>
+            </label>
+            <input type="file" id="playerImage" (change)="onFileChange($event)" accept=".jpg, .jpeg, .png"
+                aria-describedby="imageError">
+
+            <div class="image-preview" [style.backgroundImage]="imagePreview ? 'url(' + imagePreview + ')' : 'none'">
+                <span class="preview-text" *ngIf="!imagePreview">Image Preview</span>
+            </div>
+
+            <div class="error-message" id="imageError"
+                *ngIf="f['playerImage'].invalid && (f['playerImage'].dirty || f['playerImage'].touched)">
+                <span *ngIf="f['playerImage'].errors?.['required']">Player image is required.</span>
+                <span *ngIf="f['playerImage'].errors?.['fileType']">Invalid file type. Only JPG, PNG, JPEG
+                    allowed.</span>
+                <span *ngIf="f['playerImage'].errors?.['fileSize']">File size exceeds the 5MB limit.</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="playerName">Full Name</label>
+            <input type="text" id="playerName" formControlName="playerName">
+            <div class="error-message"
+                *ngIf="f['playerName'].invalid && (f['playerName'].dirty || f['playerName'].touched)">
+                <span *ngIf="f['playerName'].errors?.['required']">Full Name is required.</span>
+                <span *ngIf="f['playerName'].errors?.['minlength']">Name must be at least 3 characters.</span>
+            </div>
+        </div>
+
+        <div class="form-group half-width">
+            <label for="playerAge">Age</label>
+            <input type="number" id="playerAge" formControlName="playerAge" min="16" max="60">
+            <div class="error-message"
+                *ngIf="f['playerAge'].invalid && (f['playerAge'].dirty || f['playerAge'].touched)">
+                <span *ngIf="f['playerAge'].errors?.['required']">Age is required.</span>
+                <span *ngIf="f['playerAge'].errors?.['min'] || f['playerAge'].errors?.['max']">Age must be between 16
+                    and 60.</span>
+            </div>
+        </div>
+
+        <div class="form-group half-width">
+            <label for="playerType">Player Type</label>
+            <div class="select-wrapper">
+                <select id="playerType" formControlName="playerType">
+                    <option value="" disabled>Select Role</option>
+                    <option value="Batsman">Batsman</option>
+                    <option value="Bowler">Bowler</option>
+                    <option value="All-Rounder">All-Rounder</option>
+                    <option value="Wicket-Keeper">Wicket-Keeper</option>
+                </select>
+                <span class="dropdown-arrow">▼</span>
+            </div>
+            <div class="error-message"
+                *ngIf="f['playerType'].invalid && (f['playerType'].dirty || f['playerType'].touched)">
+                <span *ngIf="f['playerType'].errors?.['required']">Player Type is required.</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="playerPhone">Phone Number (10 Digits)</label>
+            <input type="tel" id="playerPhone" formControlName="playerPhone" placeholder="e.g., 9876543210">
+            <div class="error-message"
+                *ngIf="f['playerPhone'].invalid && (f['playerPhone'].dirty || f['playerPhone'].touched)">
+                <span *ngIf="f['playerPhone'].errors?.['required']">Phone Number is required.</span>
+                <span *ngIf="f['playerPhone'].errors?.['pattern']">Please enter a valid 10-digit number.</span>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn" [disabled]="registrationForm.invalid">
+            Register for Auction
+        </button>
+    </form>
+</div>
