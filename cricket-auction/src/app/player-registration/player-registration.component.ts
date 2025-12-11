@@ -60,31 +60,6 @@ export class PlayerRegistrationComponent implements OnInit {
     };
   }
 
-  // // --- Image Handling Logic ---
-  // onFileChange(event: any) {
-  //   const file = event.target.files[0];
-
-  //   // Reset control manually (required for file validation updates)
-  //   this.f['playerImage'].setValue(file);
-  //   this.f['playerImage'].updateValueAndValidity();
-
-  //   // Clear preview if file is invalid or null
-  //   if (!file || this.f['playerImage'].invalid) {
-  //     this.imagePreview = null;
-  //     return;
-  //   }
-
-  //   // Generate image preview using FileReader
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     this.imagePreview = reader.result;
-  //   };
-  //   reader.readAsDataURL(file);
-  // }
-
-  // player-registration.component.ts
-
-  // ... (inside PlayerRegistrationComponent class)
 
   // Helper to get error messages from the custom validators
   private getFileErrorMessage(errors: any): string {
@@ -151,4 +126,15 @@ export class PlayerRegistrationComponent implements OnInit {
     console.log('Form Submitted Successfully:', this.registrationForm.value);
     alert('Registration Successful! Data logged to console.');
   }
+  clearImageSelection() {
+  const fileInput = document.getElementById('playerImage') as HTMLInputElement;
+  if (fileInput) {
+    fileInput.value = '';
+  }
+
+  this.f['playerImage'].setValue(null);
+  this.imagePreview = null;
 }
+
+}
+
