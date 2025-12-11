@@ -1,7 +1,7 @@
 <?php
 
 /** @var \Laravel\Lumen\Routing\Router $router */
-
+use App\Http\Controllers\RegistrationController;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -16,3 +16,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+$router->group(['middleware' => 'cors'], function () use ($router) {
+   $router->post('/registration', 'RegistrationController@registration');
+});
+
+

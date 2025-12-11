@@ -1,6 +1,15 @@
-<!-- player-registration.component.html -->
 <section class="reg-wrap" aria-labelledby="regTitle">
   <div class="card">
+
+    <!-- Loader Overlay (covers card while submitting) -->
+    <div class="loader-overlay" *ngIf="loading" [attr.aria-hidden]="loading ? 'false' : 'true'">
+      <div class="loader" role="status" aria-live="polite" aria-label="Submitting, please wait">
+        <svg viewBox="0 0 50 50" class="spinner" aria-hidden="true">
+          <circle cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+        </svg>
+        <div class="loader-text">Submitting…</div>
+      </div>
+    </div>
 
     <!-- Header -->
     <header class="card-top">
@@ -75,10 +84,10 @@
         <div class="row">
           <div class="field half">
             <label for="playerAge">Age</label>
-            <input id="playerAge" type="number" min="16" max="60" formControlName="playerAge" placeholder="e.g., 28">
+            <input id="playerAge" type="number" min="10" max="60" formControlName="playerAge" placeholder="e.g., 28">
             <div class="error" *ngIf="f['playerAge'].invalid && (f['playerAge'].touched || f['playerAge'].dirty)">
               <small *ngIf="f['playerAge'].errors?.['required']">Age is required.</small>
-              <small *ngIf="f['playerAge'].errors?.['min'] || f['playerAge'].errors?.['max']">Age must be 16–60.</small>
+              <small *ngIf="f['playerAge'].errors?.['min'] || f['playerAge'].errors?.['max']">Age must be 10–60.</small>
             </div>
           </div>
 
@@ -110,13 +119,14 @@
           </div>
         </div>
 
-        <!-- BUTTONS (now under the form) -->
+        <!-- BUTTONS -->
         <div class="ctas">
-          <button type="submit" class="btn primary" [disabled]="registrationForm.invalid">
-            Register for Auction
+          <button type="submit" class="btn primary" [disabled]="registrationForm.invalid || loading">
+            <span *ngIf="!loading">Register for Auction</span>
+            <span *ngIf="loading">Submitting…</span>
           </button>
 
-          <button type="button" class="btn ghost" (click)="registrationForm.reset(); clearImageSelection();">
+          <button type="button" class="btn ghost" (click)="onReset()" [disabled]="loading">
             Reset
           </button>
         </div>
