@@ -14,7 +14,9 @@
     <!-- Header -->
     <header class="card-top">
       <div class="brand">
-        <div class="logo-glow" aria-hidden="true"></div>
+        <div class="logo-glow" aria-hidden="true">
+          <img src="../../assets/img/npl.png" alt="logo" class="jk">
+        </div>
         <h1 id="regTitle">The Auction Spotlight</h1>
       </div>
       <p class="lead">Secure your place in the next big cricket auction — professional, quick and stylish.</p>
@@ -28,22 +30,14 @@
 
         <!-- IMAGE UPLOAD -->
         <label class="dropzone" tabindex="0" for="playerImage">
-          <input
-            id="playerImage"
-            type="file"
-            accept=".jpg,.jpeg,.png"
-            (change)="onFileChange($event)"
-            aria-describedby="imageError"
-            hidden
-          />
+          <input id="playerImage" type="file" accept=".jpg,.jpeg,.png" (change)="onFileChange($event)"
+            aria-describedby="imageError" hidden />
 
           <div class="drop-inner">
-            <div
-              class="preview"
-              [style.background-image]="imagePreview ? 'url(' + imagePreview + ')' : 'none'">
+            <div class="preview" [style.background-image]="imagePreview ? 'url(' + imagePreview + ')' : 'none'">
               <ng-container *ngIf="!imagePreview">
                 <svg class="camera" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M4 7h3l2-3h6l2 3h3v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/>
+                  <path d="M4 7h3l2-3h6l2 3h3v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7zM12 17a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" />
                 </svg>
                 <div class="upload-cta">
                   <strong>Upload or drop image</strong>
@@ -96,10 +90,25 @@
             <div class="select-wrap">
               <select id="playerType" formControlName="playerType" class="c">
                 <option value="" disabled>Select role</option>
-                <option value="Batsman">Batsman</option>
-                <option value="Bowler">Bowler</option>
-                <option value="All-Rounder">All-Rounder</option>
-                <option value="Wicket-Keeper">Wicket-Keeper</option>
+                <!-- Batsman -->
+                <option value="Right-hand Batsman">Right-hand Batsman</option>
+                <option value="Left-hand Batsman">Left-hand Batsman</option>
+
+                <!-- All-Rounder (Batting) -->
+                <option value="Right-hand Batting All-Rounder">Right-hand Batting All-Rounder</option>
+                <option value="Left-hand Batting All-Rounder">Left-hand Batting All-Rounder</option>
+
+                <!-- Bowler -->
+                <option value="Right-arm Bowler">Right-arm Bowler</option>
+                <option value="Left-arm Bowler">Left-arm Bowler</option>
+
+                <!-- All-Rounder (Bowling) -->
+                <option value="Right-arm Bowling All-Rounder">Right-arm Bowling All-Rounder</option>
+                <option value="Left-arm Bowling All-Rounder">Left-arm Bowling All-Rounder</option>
+
+                <!-- Wicket Keeper -->
+                <option value="Right-hand WK Batsman">Right-hand WK Batsman</option>
+                <option value="Left-hand WK Batsman">Left-hand WK Batsman</option>
               </select>
               <span class="arrow">▾</span>
             </div>
