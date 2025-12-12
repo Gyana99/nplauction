@@ -1,0 +1,16 @@
+<div class="admin-wrapper">
+
+  <app-header (toggleSidebar)="toggleMenu()"></app-header>
+
+  <div class="main-content-wrapper">
+
+    <app-side-panel [class.open]="isMobileMenuOpen" class="a" ></app-side-panel>
+
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+
+  <app-footer></app-footer>
+</div>

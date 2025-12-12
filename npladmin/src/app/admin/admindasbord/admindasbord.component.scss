@@ -1,0 +1,121 @@
+.main-wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* UNIVERSAL CARD STYLE */
+.card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  border: 1px solid #e3e3e3;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  h2.card-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 6px;
+  }
+}
+
+/* ORGANISER LIST */
+.organiser {
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid #ddd;
+
+  .photo {
+    width: 55px;
+    height: 55px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+  }
+
+  .text {
+    .name {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .phone {
+      font-size: 14px;
+      color: #2196f3;
+      margin-top: 3px;
+    }
+  }
+}
+
+/* TEAM CARD STYLE */
+.team {
+  background: #f8f8f8;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #ddd;
+
+  .icon {
+    background: #e3f2fd;
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    border-radius: 10px;
+  }
+
+  .team-name {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .owner {
+    font-size: 14px;
+    color: #555;
+  }
+}
+
+/* FIXTURE LIST STYLE */
+.fixture {
+  background: #f8f8f8;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+
+  .team-vs {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+
+    .vs {
+      color: #d32f2f;
+      font-weight: 900;
+    }
+  }
+
+  .match-date {
+    font-size: 14px;
+    color: #444;
+    text-align: center;
+  }
+}

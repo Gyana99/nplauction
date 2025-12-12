@@ -1,0 +1,69 @@
+<div class="login-container">
+
+  <div class="login-wrapper">
+
+    <div class="login-graphic">
+      <div class="graphic-content">
+        <h1>Village League 🏏</h1>
+        <p>Admin Portal</p>
+      </div>
+    </div>
+
+    <div class="login-form-section">
+      <div class="form-header">
+        <h2>Welcome Back</h2>
+        <p>Please sign in to manage the auction.</p>
+      </div>
+
+      <form (ngSubmit)="onLogin()">
+
+        <div class="form-group">
+          <label for="username">User ID</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            [(ngModel)]="loginData.username"
+            placeholder="Enter Admin ID"
+            required
+            class="form-control"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            [(ngModel)]="loginData.password"
+            placeholder="Enter Password"
+            required
+            class="form-control"
+          >
+        </div>
+
+        <div class="form-group captcha-group">
+          <label>Security Check</label>
+          <div class="captcha-box">
+            <span class="captcha-code">{{ generatedCaptcha }}</span>
+            <button type="button" (click)="generateCaptcha()" class="refresh-btn" title="Refresh">↻</button>
+          </div>
+          <input
+            type="text"
+            name="captcha"
+            [(ngModel)]="loginData.captchaInput"
+            placeholder="Enter code above"
+            required
+            class="form-control mt-2"
+          >
+          <small class="error-text" *ngIf="captchaError">Code does not match. Try again.</small>
+        </div>
+
+        <button type="submit" class="btn-login">Secure Login</button>
+
+      </form>
+    </div>
+
+  </div>
+</div>

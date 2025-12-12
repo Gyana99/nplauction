@@ -1,0 +1,187 @@
+/* Page Background */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1abc9c 0%, #2c3e50 100%);
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Main Card */
+.login-wrapper {
+  background: white;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  display: flex;
+  min-height: 550px;
+}
+
+/* Left Graphic Side */
+.login-graphic {
+  background: #34495e;
+  /* Ensure the URL is all on one line or properly quoted */
+  background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=800&q=80');
+  background-size: cover;
+  background-position: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.graphic-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.graphic-content p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Right Form Side */
+.login-form-section {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.form-header h2 {
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.form-header p {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #34495e;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Inputs */
+.form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.form-control:focus {
+  border-color: #1abc9c;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.1);
+}
+
+/* Captcha Styling */
+.captcha-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.captcha-code {
+  background: #f0f0f0;
+  padding: 8px 20px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 5px;
+  font-size: 1.2rem;
+  color: #333;
+  text-decoration: line-through;
+  flex-grow: 1;
+  text-align: center;
+  user-select: none;
+}
+
+.refresh-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #1abc9c;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.refresh-btn:hover {
+  transform: rotate(180deg);
+}
+
+.mt-2 {
+  margin-top: 10px;
+}
+
+.error-text {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  display: block;
+  margin-top: 5px;
+}
+
+/* Submit Button */
+.btn-login {
+  width: 100%;
+  padding: 14px;
+  background: #1abc9c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.btn-login:hover {
+  background: #16a085;
+}
+
+/* --- Mobile Logic --- */
+@media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .login-graphic {
+    min-height: 120px;
+    padding: 20px;
+  }
+
+  .login-graphic h1 {
+    font-size: 1.5rem;
+  }
+
+  .login-form-section {
+    padding: 25px;
+  }
+}
