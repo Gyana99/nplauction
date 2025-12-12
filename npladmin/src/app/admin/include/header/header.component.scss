@@ -1,0 +1,191 @@
+/* Variables for easy color changes */
+$header-bg: linear-gradient(90deg, #1e293b 0%, #0f172a 100%); /* Deep Midnight Blue */
+$text-color: #f8fafc;
+$accent-color: #38bdf8; /* Sky Blue */
+$danger-color: #ef4444; /* Red for logout */
+$border-color: rgba(255, 255, 255, 0.1);
+
+.navbar {
+  height: 70px; /* Slightly taller for better touch targets */
+  background: $header-bg;
+  color: $text-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Stronger shadow for depth */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* --- Left Side --- */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Hamburger Menu Icon (Pure CSS) */
+.menu-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+
+  .bar {
+    width: 25px;
+    height: 3px;
+    background-color: rgba(255,255,255,0.7);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  &:hover .bar {
+    background-color: white;
+  }
+}
+
+/* Brand Logo */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .logo-icon {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+
+    small {
+      font-size: 0.8rem;
+      background: $accent-color;
+      color: #0f172a;
+      padding: 2px 8px;
+      border-radius: 12px;
+      margin-left: 8px;
+      font-weight: 600;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+  }
+}
+
+/* --- Right Side --- */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* User Profile */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  .avatar-circle {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, $accent-color, #2563eb);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 1rem;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .user-details {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+
+    /* Hide text on mobile for cleaner look */
+    @media (max-width: 768px) {
+      display: none;
+    }
+
+    .name {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .role {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+    }
+  }
+}
+
+/* Vertical Divider */
+.divider {
+  width: 1px;
+  height: 30px;
+  background-color: $border-color;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: rgba(239, 68, 68, 0.1); /* Transparent Red */
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: $danger-color;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+
+  .logout-icon {
+    font-style: normal;
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+  }
+
+  &:hover {
+    background: $danger-color;
+    color: white;
+    border-color: $danger-color;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+
+    .logout-icon {
+      transform: translateX(3px); /* Arrow moves right */
+    }
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 576px) {
+  .brand h2 {
+    font-size: 1.1rem;
+    small { display: none; } /* Hide 'Admin' badge on tiny screens */
+  }
+
+  .logout-btn span {
+    display: none; /* Hide 'Logout' text, show only icon */
+  }
+
+  .navbar {
+    padding: 0 15px;
+  }
+}

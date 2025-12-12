@@ -1,6 +1,7 @@
 <?php
 
 /** @var \Laravel\Lumen\Routing\Router $router */
+
 use App\Http\Controllers\RegistrationController;
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,10 @@ use App\Http\Controllers\RegistrationController;
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+// echo ';;;';
 $router->group(['middleware' => 'cors'], function () use ($router) {
-   $router->post('/registration', 'RegistrationController@registration');
+    $router->post('/registration', 'RegistrationController@registration');
+    $router->post('/login', 'LoginController@login');
+    // routes/web.php or routes/api.php
+
 });
-
-

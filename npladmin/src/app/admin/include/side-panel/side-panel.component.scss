@@ -1,0 +1,111 @@
+/* --- Variables --- */
+$sidebar-bg: #0f172a;
+$text-muted: #94a3b8;
+$text-light: #f1f5f9;
+$accent-color: #38bdf8;
+$active-bg-gradient: linear-gradient(90deg, rgba(56, 189, 248, 0.15) 0%, transparent 100%);
+$hover-bg: rgba(255, 255, 255, 0.05);
+
+/* --- Base Styles (Desktop) --- */
+.sidebar {
+  width: 260px;
+  height: calc(100vh - 70px);
+  background-color: $sidebar-bg;
+  color: $text-muted;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  overflow-y: auto;
+  padding-bottom: 20px;
+}
+
+.nav-content { padding: 20px 0; }
+
+.nav-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #71dd18;
+  margin: 20px 25px 10px;
+  text-transform: uppercase;
+}
+
+.nav-list { list-style: none; padding: 0; margin: 0; }
+
+.nav-list li a {
+  display: flex;
+  align-items: center;
+  padding: 14px 25px;
+  color: $text-muted;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-list li a .icon {
+  margin-right: 12px;
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+  filter: grayscale(100%);
+  transition: 0.3s;
+}
+
+/* Hover & Active States */
+.nav-list li a:hover {
+  background-color: $hover-bg;
+  color: $text-light;
+  padding-left: 30px;
+}
+
+.nav-list li a:hover .icon { filter: grayscale(0%); transform: scale(1.1); }
+
+.nav-list li a.active {
+  background: $active-bg-gradient;
+  color: $accent-color;
+  border-left-color: $accent-color;
+  font-weight: 600;
+}
+
+.nav-list li a.active .icon {
+  filter: grayscale(0%);
+  text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.sidebar-footer {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  small { font-size: 0.7rem; color: #475569; }
+}
+
+/* --- MOBILE RESPONSIVENESS (The Fix) --- */
+@media (max-width: 768px) {
+
+  /* Style the HOST element (<app-side-panel>) directly */
+  :host {
+    position: fixed;
+    top: 70px;
+    left: -260px; /* Hidden by default */
+    width: 260px;
+    height: calc(100vh - 70px);
+    z-index: 999;
+    transition: left 0.3s ease-in-out;
+    background-color: $sidebar-bg; /* Ensure background is solid */
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+  }
+
+  /* When Dashboard adds class="open" to the tag */
+  :host.open {
+    left: 0; /* Slide In */
+  }
+
+  /* Ensure the inner container fills the host */
+  .sidebar {
+    width: 100%;
+    height: 100%;
+    border-right: none;
+  }
+}
