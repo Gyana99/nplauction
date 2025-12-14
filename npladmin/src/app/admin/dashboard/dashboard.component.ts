@@ -9,6 +9,8 @@ export class DashboardComponent {
   isMobileMenuOpen: boolean = false; // changed Boolean to boolean
 
   toggleMenu() {
+    //alert(this.isMobileMenuOpen);
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    console.log("Sidebar status:", this.isMobileMenuOpen);
   }
 }

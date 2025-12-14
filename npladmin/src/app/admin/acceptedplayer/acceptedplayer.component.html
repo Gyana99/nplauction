@@ -1,0 +1,36 @@
+<!-- Search Bar -->
+<div class="search-container">
+    <input type="text" placeholder="Search players..." class="search-box" [(ngModel)]="searchText" />
+</div>
+
+<!-- Player Cards -->
+<div class="player-container">
+
+    <div class="player-card" *ngFor="let p of players | filterPlayers:searchText">
+
+        <img class="player-photo" [src]="url+p.photo" alt="{{p.name}}" />
+
+        <div class="player-info">
+            <h3 class="player-name">{{ p.name }}</h3>
+
+            <p class="detail"><strong>Type:</strong> {{ p.type_of_player }}</p>
+            <p class="detail"><strong>Base Price:</strong> ₹{{ p.base_price }}</p>
+            <p class="detail"><strong>Age:</strong> {{ p.age }}</p>
+        </div>
+
+        <div class="" *ngIf="roll==1" [ngClass]="p.publish_status == 1 ? 'published' : 'unpublished'">
+
+            <a *ngIf="p.status == 0" href="javascript:void(0)" class="accept-link" (click)="acceptPlayer(p)">
+                Accept
+            </a>
+             <a *ngIf="p.status == 1" href="javascript:void(0)" class="accept-linkdata" >
+                Accepted
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</div>

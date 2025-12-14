@@ -13,6 +13,7 @@ class RegistrationController extends Controller
 {
     public function registration(Request $request)
     {
+        //return Carbon::now()->toDateTimeString();
         // 1. Basic validation (you can expand this)
         $name = $request->input('name');
         $mobile = $request->input('mobile_no');
@@ -32,8 +33,8 @@ class RegistrationController extends Controller
                 'age' => $age,
                 'type_of_player' => $playerType,
                 'photo' => null,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'created_at' => Carbon::now()->toDateTimeString(),
+                //'updated_at' => Carbon::now()->toDateTimeString()
             ]);
 
             $row = DB::table('player_registration')->where('id', $insertId)->first();
@@ -99,7 +100,9 @@ class RegistrationController extends Controller
                 'mobile_no' => $mobile,
                 'age'   => $age,
                 'type_of_player'  => $playerType,
-                'photo' => $dbPath
+                'photo' => $dbPath,
+                'created_at' => Carbon::now()->toDateTimeString(),
+                //'updated_at' => Carbon::now()->toDateTimeString()
             ]);
 
             $row = DB::table('player_registration')->where('id', $insertId)->first();
@@ -109,6 +112,64 @@ class RegistrationController extends Controller
             // log error if you have logger
             // Log::error($e->getMessage());
             return response()->json(['status' => 'error', 'message' => 'Server error', 'detail' => $e->getMessage()], 500);
+        }
+    }
+    public function allPlayer()
+    {
+        try {
+            // Fetch all players
+            $players = DB::table('player_registration')->orderBy('created_at', 'DESC')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+            return response()->json([
+                'status'  => true,
+                'message' => 'Players fetched successfully',
+                'data'    => $players
+            ], 200);
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'status'  => false,
+                'message' => 'Something went wrong while fetching players.',
+                'error'   => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function accept(Request $request)
+    {
+        $id = $request->id;
+
+        try {
+            DB::beginTransaction();
+
+            $update = DB::table('player_registration')
+                ->where('id', $id)
+                ->update(['status' => 1]);
+
+            if (!$update) {
+                DB::rollBack();
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'Player not found or update failed.'
+                ], 404);
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'status'  => true,
+                'message' => 'Player status updated successfully!'
+            ], 200);
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status'  => false,
+                'message' => 'Something went wrong.',
+                'error'   => $e->getMessage()
+            ], 500);
         }
     }
 }

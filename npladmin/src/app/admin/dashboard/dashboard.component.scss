@@ -1,23 +1,39 @@
-.main-content-wrapper {
-  display: flex; /* Puts Sidebar and Content side-by-side */
-  min-height: calc(100vh - 60px - 40px); /* Adjust based on Header/Footer height */
+/* Entire page uses full viewport height */
+.admin-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* 🔥 everything stays inside 100vh */
+  overflow: hidden; /* prevent page scroll */
 }
 
+/* HEADER (fixed height) */
+app-header {
+  height: 70px;
+  flex-shrink: 0;
+}
+
+/* FOOTER (fixed height) */
+app-footer {
+  height: 40px;
+  flex-shrink: 0;
+}
+
+/* MAIN MIDDLE AREA: sidebar + content */
+.main-content-wrapper {
+  flex: 1;             /* takes remaining height between header & footer */
+  display: flex;
+  min-height: 0;       /* 🔥 THIS ALLOWS CHILDREN TO SCROLL */
+}
+
+/* CONTENT AREA SCROLLS */
 .content-area {
-  flex-grow: 1; /* Takes up remaining width */
+  flex: 1;
+  overflow-y: auto;    /* 🔥 ONLY THIS AREA SCROLLS */
   padding: 20px;
-  background-color: #f4f6f7;
+  background: #f4f6f7;
 }
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 900; /* Behind sidebar (999), but above content */
-  backdrop-filter: blur(2px);
-}
-.a{
-  height: 100vh;
+
+/* SIDEBAR (fixed) */
+app-side-panel {
+  flex-shrink: 0;
 }

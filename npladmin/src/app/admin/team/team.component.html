@@ -1,0 +1,101 @@
+<div class="team-page">
+
+    <form [formGroup]="teamForm" (ngSubmit)="submit()" class="team-form">
+
+        <!-- TEAM LOGO -->
+        <div class="upload-box" (click)="logoInput.click()" [class.error]="isInvalid('logo')">
+
+            <input type="file" #logoInput hidden accept="image/*" (change)="onImageSelect($event, 'logo')">
+
+            <ng-container *ngIf="logoPreview; else logoIcon">
+                <img [src]="logoPreview" class="preview">
+            </ng-container>
+
+            <ng-template #logoIcon>
+                <i class="fa fa-image"></i>
+                <span>Upload Team Logo</span>
+            </ng-template>
+        </div>
+        <small class="error-text" *ngIf="isInvalid('logo')">
+            Team logo is required
+        </small>
+
+        <!-- OWNER IMAGE -->
+        <div class="upload-box" (click)="ownerInput.click()" [class.error]="isInvalid('woner_image')">
+
+            <input type="file" #ownerInput hidden accept="image/*" (change)="onImageSelect($event, 'woner_image')">
+
+            <ng-container *ngIf="ownerPreview; else ownerIcon">
+                <img [src]="ownerPreview" class="preview">
+            </ng-container>
+
+            <ng-template #ownerIcon>
+                <i class="fa fa-user"></i>
+                <span>Upload Owner Image</span>
+            </ng-template>
+        </div>
+        <small class="error-text" *ngIf="isInvalid('woner_image')">
+            Owner image is required
+        </small>
+
+        <!-- TEAM NAME -->
+        <input type="text" placeholder="Team Name" formControlName="team_name"
+            [class.error-input]="isInvalid('team_name')">
+
+        <small class="error-text" *ngIf="isInvalid('team_name')">
+            Team name is required
+        </small>
+
+        <!-- SHORT NAME -->
+        <input type="text" placeholder="Short Name" formControlName="short_name"
+            [class.error-input]="isInvalid('short_name')">
+
+        <small class="error-text" *ngIf="isInvalid('short_name')">
+            Short name is required
+        </small>
+
+        <!-- OWNER NAME -->
+        <input type="text" placeholder="Owner Name" formControlName="woner_name"
+            [class.error-input]="isInvalid('woner_name')">
+
+        <small class="error-text" *ngIf="isInvalid('woner_name')">
+            Owner name is required
+        </small>
+
+        <!-- SUBMIT -->
+        <button type="submit">
+            <i class="fa fa-save"></i> {{ butt }} Team
+        </button>
+
+    </form>
+
+
+
+    <!-- LIST -->
+    <table class="team-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Team</th>
+                <th>Short</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let team of teams; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ team.team_name }}</td>
+                <td>{{ team.short_name }}</td>
+                <td>{{ team.amount }}</td>
+                <td>{{ team.status ? 'Active' : 'Inactive' }}</td>
+                <td>
+                    <button (click)="editTeam(team)">Edit</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

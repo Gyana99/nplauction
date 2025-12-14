@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'; // <--- Added OnInit here
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
+import { EncryptionService } from 'src/app/services/encryption.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit { // <--- Added implements OnInit 
   generatedCaptcha: string = '';
   captchaError: boolean = false;
 
-  constructor(private router: Router,private CS:CommonService) {}
+  constructor(private router: Router,private CS:CommonService,private en:EncryptionService) {}
 
   // This runs automatically when the component loads
   ngOnInit(): void {
@@ -56,9 +57,10 @@ export class LoginComponent implements OnInit { // <--- Added implements OnInit 
           console.log(id);
           console.log(username);
           console.log(roll);
-          localStorage.setItem('id',id);
-          localStorage.setItem('username',username);
-          localStorage.setItem('roll',roll);
+
+          localStorage.setItem('id',this.en.encrypt(id));
+          localStorage.setItem('username',this.en.encrypt(username));
+          localStorage.setItem('roll',this.en.encrypt(roll));
           window.location.href = 'dashboard';
         }
       })

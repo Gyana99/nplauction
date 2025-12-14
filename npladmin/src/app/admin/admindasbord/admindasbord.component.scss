@@ -1,121 +1,130 @@
-.main-wrapper {
-  display: grid;
-  grid-template-columns: 1fr;
+.section {
+  margin-bottom: 40px;
+}
+
+/* Titles */
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+/* Row Box Wrapper */
+.row {
+  display: flex;
   gap: 20px;
-  padding: 20px;
-
-  @media (min-width: 900px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  flex-wrap: wrap; /* allows wrapping on small screens */
 }
 
-/* UNIVERSAL CARD STYLE */
-.card {
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 18px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-  border: 1px solid #e3e3e3;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-
-  h2.card-title {
-    font-size: 20px;
-    margin-bottom: 10px;
-    font-weight: 700;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 6px;
-  }
-}
-
-/* ORGANISER LIST */
-.organiser {
-  background: #f8f8f8;
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border: 1px solid #ddd;
-
-  .photo {
-    width: 55px;
-    height: 55px;
-    border-radius: 8px;
-    object-fit: cover;
-    border: 2px solid #ccc;
-  }
-
-  .text {
-    .name {
-      font-size: 16px;
-      font-weight: 700;
-    }
-
-    .phone {
-      font-size: 14px;
-      color: #2196f3;
-      margin-top: 3px;
-    }
-  }
-}
-
-/* TEAM CARD STYLE */
-.team {
-  background: #f8f8f8;
+/* MAIN BOX STYLE */
+.box {
+  width: 220px;
+  height: auto;
+  min-height: 180px;
+  border: 3px solid #000;
+  border-radius: 8px;
   padding: 12px;
-  border-radius: 10px;
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  border: 1px solid #ddd;
-
-  .icon {
-    background: #e3f2fd;
-    width: 55px;
-    height: 55px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    border-radius: 10px;
-  }
-
-  .team-name {
-    font-weight: 700;
-    font-size: 16px;
-  }
-
-  .owner {
-    font-size: 14px;
-    color: #555;
-  }
+  box-sizing: border-box;
+  background: #fff;
 }
 
-/* FIXTURE LIST STYLE */
-.fixture {
-  background: #f8f8f8;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+/* ORGANISER BOX */
+.info-box {
+  text-align: center;
+}
 
-  .team-vs {
-    display: flex;
+.info-box .photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+}
+
+.info-box .name {
+  margin: 8px 0 4px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* TEAM BOX */
+.team-box {
+  text-align: center;
+}
+
+.team-box .team-logo {
+  width: 60px;
+  height: 60px;
+}
+
+.owner {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.owner-photo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+/* FIXTURE BOX */
+.vs-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.vs-title span {
+  color: red;
+}
+
+.match-date,
+.match-time {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* ---------------------------
+      RESPONSIVE BREAKPOINTS
+   --------------------------- */
+
+/* Tablets (768px - 992px) */
+@media (max-width: 992px) {
+  .row {
     justify-content: space-between;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 8px;
-
-    .vs {
-      color: #d32f2f;
-      font-weight: 900;
-    }
   }
+  .box {
+    width: 45%; /* two per row */
+  }
+}
 
-  .match-date {
+/* Mobiles (max-width: 600px) */
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .box {
+    width: 100%; /* full width */
+  }
+  .title {
+    font-size: 18px;
+  }
+  .info-box .photo,
+  .team-box .team-logo {
+    width: 50px;
+    height: 50px;
+  }
+  .owner-photo {
+    width: 30px;
+    height: 30px;
+  }
+  .vs-title {
     font-size: 14px;
-    color: #444;
-    text-align: center;
   }
 }

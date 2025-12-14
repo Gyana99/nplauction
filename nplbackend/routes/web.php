@@ -20,7 +20,16 @@ $router->get('/', function () use ($router) {
 // echo ';;;';
 $router->group(['middleware' => 'cors'], function () use ($router) {
     $router->post('/registration', 'RegistrationController@registration');
+    $router->post('/allplyer', 'RegistrationController@allPlayer');
+    $router->post('/accept', 'RegistrationController@accept');
     $router->post('/login', 'LoginController@login');
+    $router->post('/addteam', 'TeamController@addteam');
+    $router->post('/viewTeam', 'TeamController@viewTeam');
+    $router->post('/updateTeam', 'TeamController@updateTeam');
+    $router->post('/giveAmount', 'TeamController@giveAmount');
+    
+    
+    
     // routes/web.php or routes/api.php
 
 });

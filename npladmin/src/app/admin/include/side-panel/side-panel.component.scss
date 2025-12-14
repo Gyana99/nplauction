@@ -1,33 +1,63 @@
-/* --- Variables --- */
+/* variables */
 $sidebar-bg: #0f172a;
 $text-muted: #94a3b8;
 $text-light: #f1f5f9;
 $accent-color: #38bdf8;
-$active-bg-gradient: linear-gradient(90deg, rgba(56, 189, 248, 0.15) 0%, transparent 100%);
-$hover-bg: rgba(255, 255, 255, 0.05);
+$active-bg-gradient: linear-gradient(90deg, rgba(56,189,248,0.12) 0%, transparent 100%);
+$hover-bg: rgba(255,255,255,0.03);
 
-/* --- Base Styles (Desktop) --- */
 .sidebar {
   width: 260px;
-  height: calc(100vh - 70px);
+  height: 100vh;
   background-color: $sidebar-bg;
   color: $text-muted;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,0.04);
   padding-bottom: 20px;
+  transition: transform 0.28s ease-in-out, box-shadow 0.28s;
+
+  overflow-y: auto;     // 🔥 add this
+  overflow-x: hidden;    // clean horizontal overflow
 }
 
-.nav-content { padding: 20px 0; }
+
+/* USER CARD */
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, $accent-color, #2563eb);
+    box-shadow: 0 4px 10px rgba(2,6,23,0.6);
+  }
+
+  .user-meta {
+    .username { color: $text-light; font-weight: 700; font-size: 0.95rem; }
+    .user-role { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+  }
+}
+
+.nav-content { padding: 14px 0; flex: 1 1 auto; overflow: auto; }
 
 .nav-label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 1px;
   color: #71dd18;
-  margin: 20px 25px 10px;
+  margin: 16px 20px 8px;
   text-transform: uppercase;
+  letter-spacing: 0.8px;
 }
 
 .nav-list { list-style: none; padding: 0; margin: 0; }
@@ -35,77 +65,79 @@ $hover-bg: rgba(255, 255, 255, 0.05);
 .nav-list li a {
   display: flex;
   align-items: center;
-  padding: 14px 25px;
+  padding: 12px 20px;
   color: $text-muted;
   text-decoration: none;
   font-size: 0.95rem;
-  font-weight: 500;
   border-left: 3px solid transparent;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  border-radius: 6px;
+  margin: 4px 12px;
 }
 
 .nav-list li a .icon {
   margin-right: 12px;
   font-size: 1.1rem;
-  width: 24px;
+  width: 28px;
   text-align: center;
   filter: grayscale(100%);
-  transition: 0.3s;
+  transition: transform 0.2s, filter 0.2s;
 }
 
-/* Hover & Active States */
+/* hover/active */
 .nav-list li a:hover {
   background-color: $hover-bg;
   color: $text-light;
-  padding-left: 30px;
+  transform: translateX(3px);
 }
 
-.nav-list li a:hover .icon { filter: grayscale(0%); transform: scale(1.1); }
+.nav-list li a:hover .icon { filter: grayscale(0%); transform: scale(1.06); }
 
 .nav-list li a.active {
   background: $active-bg-gradient;
   color: $accent-color;
   border-left-color: $accent-color;
   font-weight: 600;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.5);
 }
 
-.nav-list li a.active .icon {
-  filter: grayscale(0%);
-  text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+.nav-list li a.active .icon { filter: grayscale(0%); text-shadow: 0 0 6px rgba(56,189,248,0.3); }
+
+/* footer */
+.sidebar-footer { text-align: center; padding: 12px; border-top: 1px solid rgba(255,255,255,0.03);
+  small { font-size: 0.72rem; color: #475569; }
 }
 
-.sidebar-footer {
-  text-align: center;
-  padding: 15px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  small { font-size: 0.7rem; color: #475569; }
-}
-
-/* --- MOBILE RESPONSIVENESS (The Fix) --- */
+/* MOBILE: overlay + slide-in behaviour */
 @media (max-width: 768px) {
-
-  /* Style the HOST element (<app-side-panel>) directly */
-  :host {
-    position: fixed;
+  .sidebar {
+   // position: fixed;
     top: 70px;
-    left: -260px; /* Hidden by default */
+    left: 0;
     width: 260px;
     height: calc(100vh - 70px);
-    z-index: 999;
-    transition: left 0.3s ease-in-out;
-    background-color: $sidebar-bg; /* Ensure background is solid */
-    box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+    background: #0f172a;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto; /* 🔥 make menu scrollable */
   }
 
-  /* When Dashboard adds class="open" to the tag */
-  :host.open {
-    left: 0; /* Slide In */
+  .sidebar.open {
+    transform: translateX(0);
   }
+}
 
-  /* Ensure the inner container fills the host */
+:host {
+  width: 0;
+  overflow: hidden;
+  transition: 0.3s ease;
+  display: block;
+}
+
+/* When menu is opened */
+:host(.open) {
+  width: 250px;   // your sidebar width
   .sidebar {
-    width: 100%;
-    height: 100%;
-    border-right: none;
+    left: 260px;
   }
 }

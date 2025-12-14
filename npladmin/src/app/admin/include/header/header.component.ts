@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { EncryptionService } from 'src/app/services/encryption.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,10 +13,10 @@ export class HeaderComponent {
   id:any;
   user:any;
   roll:any;
-  constructor(private r:Router) {
-    this.id = localStorage.getItem('id');
-    this.user = localStorage.getItem('username');
-    this.roll = localStorage.getItem('roll');
+  constructor(private r:Router,private en:EncryptionService) {
+    this.id = this.en.decrypt(localStorage.getItem('id'));
+    this.user = this.en.decrypt(localStorage.getItem('username'));
+    this.roll = this.en.decrypt(localStorage.getItem('roll'));
   }
 
   // This function runs when the button is clicked
