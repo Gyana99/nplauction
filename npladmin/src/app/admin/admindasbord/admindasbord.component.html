@@ -15,69 +15,69 @@
       <p class="phone">📞 9090909090</p>
     </div>
 
-     <div class="box info-box">
+    <div class="box info-box">
       <img src="https://via.placeholder.com/60" class="photo">
       <h4 class="name">Amit Singh</h4>
       <p class="phone">📞 9090909090</p>
     </div>
 
-     <div class="box info-box">
+    <div class="box info-box">
       <img src="https://via.placeholder.com/60" class="photo">
       <h4 class="name">Amit Singh</h4>
       <p class="phone">📞 9090909090</p>
     </div>
 
-     <div class="box info-box">
+    <div class="box info-box">
       <img src="https://via.placeholder.com/60" class="photo">
       <h4 class="name">Amit Singh</h4>
       <p class="phone">📞 9090909090</p>
     </div>
 
-     <div class="box info-box">
+    <div class="box info-box">
       <img src="https://via.placeholder.com/60" class="photo">
       <h4 class="name">Amit Singh</h4>
       <p class="phone">📞 9090909090</p>
     </div>
 
-     <div class="box info-box">
+    <div class="box info-box">
       <img src="https://via.placeholder.com/60" class="photo">
       <h4 class="name">Amit Singh</h4>
       <p class="phone">📞 9090909090</p>
     </div>
 
-     <div class="box info-box">
+    <div class="box info-box">
       <img src="https://via.placeholder.com/60" class="photo">
       <h4 class="name">Amit Singh</h4>
       <p class="phone">📞 9090909090</p>
     </div>
 
- <div class="box info-box">
+    <div class="box info-box">
       <img src="https://via.placeholder.com/60" class="photo">
       <h4 class="name">Amit Singh</h4>
       <p class="phone">📞 9090909090</p>
     </div>
 
-    
+
   </div>
 </div>
 
 
 <!-- TEAM SECTION -->
-<div class="section">
+<div class="section" *ngIf="teams.length>0">
   <h3 class="title">team</h3>
   <div class="row">
 
-    <div class="box team-box">
-      <img src="https://via.placeholder.com/60" class="team-logo">
-      <h4 class="team-name">Thunder Warriors</h4>
+    <div *ngFor="let teamshtml of teams" class="box team-box">
+      <img [src]="path+'logo'+teamshtml.logo" class="team-logo">
+      <h4 class="team-name">{{ teamshtml.team_name }}</h4>
 
       <div class="owner">
-        <img src="https://via.placeholder.com/40" class="owner-photo">
-        <p class="owner-name">Owner: Rakesh</p>
+        <img [src]="path+'owner'+teamshtml.woner_image" class="owner-photo">
+        <p class="owner-name">{{ teamshtml.woner_name }}</p>
       </div>
     </div>
 
-    <div class="box team-box">
+    <!-- <div class="box team-box">
       <img src="https://via.placeholder.com/60" class="team-logo">
       <h4 class="team-name">Red Lions</h4>
 
@@ -85,7 +85,7 @@
         <img src="https://via.placeholder.com/40" class="owner-photo">
         <p class="owner-name">Owner: Manoj</p>
       </div>
-    </div>
+    </div> -->
 
   </div>
 </div>

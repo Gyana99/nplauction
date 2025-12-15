@@ -139,5 +139,6 @@ $hover-bg: rgba(255,255,255,0.03);
   width: 250px;   // your sidebar width
   .sidebar {
     left: 260px;
+    transform:translate(10px, 10px);
   }
 }
