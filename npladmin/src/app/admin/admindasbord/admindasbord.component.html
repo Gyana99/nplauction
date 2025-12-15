@@ -68,11 +68,11 @@
   <div class="row">
 
     <div *ngFor="let teamshtml of teams" class="box team-box">
-      <img [src]="path+'logo'+teamshtml.logo" class="team-logo">
+      <img [src]="path+'logo/'+teamshtml.logo" class="team-logo">
       <h4 class="team-name">{{ teamshtml.team_name }}</h4>
 
       <div class="owner">
-        <img [src]="path+'owner'+teamshtml.woner_image" class="owner-photo">
+        <img [src]="path+'owner/'+teamshtml.woner_image" class="owner-photo">
         <p class="owner-name">{{ teamshtml.woner_name }}</p>
       </div>
     </div>

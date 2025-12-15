@@ -199,11 +199,9 @@ COMMIT;
 
 
 
+vchSEODescription
 
-
-
-
-
+team_id
 
 
 ALTER TABLE `team` ADD `woner_image` VARCHAR(200) NULL DEFAULT NULL AFTER `woner_name`;

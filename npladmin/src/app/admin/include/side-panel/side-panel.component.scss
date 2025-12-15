@@ -142,3 +142,12 @@ $hover-bg: rgba(255,255,255,0.03);
     transform:translate(10px, 10px);
   }
 }
+.sidebar {
+  // position: fixed;
+  // top: 60px;          // header height
+  // left: 0;
+  // width: 260px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  background: #1e1e2f;
+}

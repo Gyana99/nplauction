@@ -2,6 +2,7 @@
 
   <div class="nav-content">
 
+
     <p class="nav-label">OVERVIEW</p>
     <ul class="nav-list">
       <li>
@@ -69,6 +70,10 @@
         </a>
       </li>
     </ul>
+    <ng-container *ngIf="roll == '1'">
+
+
+
     <p class="nav-label">ORGANISER</p>
     <ul class="nav-list">
 
@@ -94,6 +99,28 @@
       </li>
 
     </ul>
+     </ng-container>
+<ng-container *ngIf="roll == '2'">
+    <p class="nav-label">Team</p>
+    <ul class="nav-list">
+
+      <li>
+        <a routerLink="/teams" routerLinkActive="active">
+          <span class="icon">🛡️</span>
+          <span class="text">My Point</span>
+        </a>
+      </li>
+
+      <li>
+        <a routerLink="/give-points" routerLinkActive="active">
+          <span class="icon">⭐</span>
+          <span class="text">My Player</span>
+        </a>
+      </li>
+
+
+    </ul>
+    </ng-container>
 
 
     <!-- <p class="nav-label">SYSTEM</p>
