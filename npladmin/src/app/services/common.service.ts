@@ -35,6 +35,9 @@ export class CommonService {
   }
   giveAmount(formdata:any): Observable<any>{
     return this.http.post(`${this.baseUrl}giveAmount`, formdata);
+  }
+  mypointandhistry(formdata:any): Observable<any>{
+    return this.http.post(`${this.baseUrl}mypointandhistry`, formdata);
 
   }
 }

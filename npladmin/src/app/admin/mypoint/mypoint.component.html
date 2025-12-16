@@ -1,0 +1,48 @@
+<div class="team-page">
+
+    <!-- LEFT: SUMMARY / HISTORY -->
+    <div class="team-form">
+
+        <!-- Amount Card -->
+        <div class="amount-card">
+            <h4>Total Amount</h4>
+            <span class="amount">₹ {{ amount }}</span>
+            <p class="player-count">
+                Total Players: <strong>{{ histry?.length || 0 }}</strong>
+            </p>
+        </div>
+
+        <!-- History Table -->
+        <div class="table-wrapper">
+            <h4 class="section-title">Player Purchase History</h4>
+
+            <table class="team-table" *ngIf="histry && histry.length > 0; else noData">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Player</th>
+                        <th>Price Spent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let histryhtml of histry; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ histryhtml.name }}</td>
+                        <td class="price">₹ {{ histryhtml.occupied_price }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- No Data -->
+            <ng-template #noData>
+                <div class="no-data">
+                    🚫 No player found
+                </div>
+            </ng-template>
+        </div>
+
+    </div>
+
+
+
+</div>

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { EncryptionService } from 'src/app/services/encryption.service';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-point',
@@ -11,13 +13,20 @@ import Swal from 'sweetalert2';
 })
 export class PointComponent {
   teams: any[] = [];
-  imageBaseUrl = environment.apiUrl + 'storage/teams/logo/'; // change URL
+  imageBaseUrl = environment.apiUrl + 'storage/uploads/logo/'; // change URL
   loadingId: number | null = null;
 
-  constructor(private teamService: CommonService,private en:EncryptionService) { }
-
+  constructor(private teamService: CommonService,private en:EncryptionService,private Router:Router) { }
+  roll = this.en.decrypt(localStorage.getItem('roll'));
+  
   ngOnInit(): void {
+    console.log(this.roll);
+    
+    if(this.roll == '2' || this.roll == '0'){
+      this.Router.navigate(['dashboard'])
+    }
     this.loadTeams();
+    
   }
 
   /* ==========================

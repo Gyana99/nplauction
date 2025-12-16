@@ -74,52 +74,59 @@
 
 
 
-    <p class="nav-label">ORGANISER</p>
-    <ul class="nav-list">
+      <p class="nav-label">ORGANISER</p>
+      <ul class="nav-list">
 
-      <li>
-        <a routerLink="/teams" routerLinkActive="active">
-          <span class="icon">🛡️</span>
-          <span class="text">Teams</span>
-        </a>
-      </li>
+        <li>
+          <a routerLink="/teams" routerLinkActive="active">
+            <span class="icon">🛡️</span>
+            <span class="text">Teams</span>
+          </a>
+        </li>
 
-      <li>
-        <a routerLink="/give-points" routerLinkActive="active">
-          <span class="icon">⭐</span>
-          <span class="text">Give Points</span>
-        </a>
-      </li>
+        <li>
+          <a routerLink="/give-points" routerLinkActive="active">
+            <span class="icon">⭐</span>
+            <span class="text">Give Points</span>
+          </a>
+        </li>
 
-      <li>
-        <a routerLink="/select-player" routerLinkActive="active">
-          <span class="icon">👤</span>
-          <span class="text">Select Player for Auction</span>
-        </a>
-      </li>
+        <li>
+          <a routerLink="/select-player" routerLinkActive="active">
+            <span class="icon">👤</span>
+            <span class="text">Select Player for Auction</span>
+          </a>
+        </li>
 
-    </ul>
-     </ng-container>
-<ng-container *ngIf="roll == '2'">
-    <p class="nav-label">Team</p>
-    <ul class="nav-list">
+      </ul>
+    </ng-container>
+    <ng-container *ngIf="roll == '2'">
+      <p class="nav-label">Team</p>
+      <ul class="nav-list">
 
-      <li>
-        <a routerLink="/teams" routerLinkActive="active">
-          <span class="icon">🛡️</span>
-          <span class="text">My Point</span>
-        </a>
-      </li>
+        <li>
+          <a routerLink="/mypoint" routerLinkActive="active">
+            <span class="icon">🛡️</span>
+            <span class="text">My Point</span>
+          </a>
+        </li>
 
-      <li>
-        <a routerLink="/give-points" routerLinkActive="active">
-          <span class="icon">⭐</span>
-          <span class="text">My Player</span>
-        </a>
-      </li>
+        <li>
+          <a routerLink="/myteam" routerLinkActive="active">
+            <span class="icon">⭐</span>
+            <span class="text">My Player</span>
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/make11" routerLinkActive="active">
+            <span class="icon">⭐</span>
+            <span class="text">Make Playing 11</span>
+          </a>
+        </li>
 
 
-    </ul>
+      </ul>
     </ng-container>
 
 
