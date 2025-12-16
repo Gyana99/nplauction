@@ -38,6 +38,8 @@ export class CommonService {
   }
   mypointandhistry(formdata:any): Observable<any>{
     return this.http.post(`${this.baseUrl}mypointandhistry`, formdata);
-
+  }
+  assignRole(formdata:any): Observable<any>{
+    return this.http.post(`${this.baseUrl}assignRole`, formdata);
   }
 }

@@ -1,130 +1,169 @@
+/* =========================
+   GLOBAL
+========================= */
 .section {
-  margin-bottom: 40px;
+  margin-bottom: 50px;
 }
 
-/* Titles */
 .title {
-  font-size: 20px;
-  font-weight: 600;
-  font-style: italic;
-  margin-bottom: 15px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #0f172a;
+  position: relative;
 }
 
-/* Row Box Wrapper */
-.row {
-  display: flex;
+.title::after {
+  content: '';
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(135deg, #2563eb, #38bdf8);
+  display: block;
+  margin-top: 6px;
+  border-radius: 4px;
+}
+
+/* =========================
+   GRID LAYOUT
+========================= */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  flex-wrap: wrap; /* allows wrapping on small screens */
 }
 
-/* MAIN BOX STYLE */
-.box {
-  width: 220px;
-  height: auto;
-  min-height: 180px;
-  border: 3px solid #000;
-  border-radius: 8px;
-  padding: 12px;
-  box-sizing: border-box;
-  background: #fff;
-}
-
-/* ORGANISER BOX */
-.info-box {
+/* =========================
+   CARD BASE
+========================= */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
   text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.info-box .photo {
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
 }
 
-.info-box .name {
-  margin: 8px 0 4px;
-  font-size: 16px;
-  font-weight: bold;
+/* =========================
+   ORGANISER CARD
+========================= */
+.organiser-card .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #38bdf8;
+  margin-bottom: 10px;
 }
 
-/* TEAM BOX */
-.team-box {
-  text-align: center;
+.organiser-card .name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
 }
 
-.team-box .team-logo {
-  width: 60px;
-  height: 60px;
+.organiser-card .role {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.organiser-card .phone {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+/* =========================
+   TEAM CARD
+========================= */
+.team-card .team-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.team-name {
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .owner {
-  margin-top: 10px;
+  margin-top: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
-.owner-photo {
-  width: 35px;
-  height: 35px;
+.owner-avatar {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
-/* FIXTURE BOX */
+.owner-name {
+  font-size: 0.85rem;
+  color: #334155;
+}
+
+/* =========================
+   FIXTURE CARD
+========================= */
+.fixture-card {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+
 .vs-title {
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 700;
   margin-bottom: 10px;
-  text-align: center;
 }
 
 .vs-title span {
-  color: red;
+  color: #ef4444;
 }
 
-.match-date,
-.match-time {
-  text-align: center;
-  font-size: 14px;
-  margin-top: 6px;
-}
-
-/* ---------------------------
-      RESPONSIVE BREAKPOINTS
-   --------------------------- */
-
-/* Tablets (768px - 992px) */
-@media (max-width: 992px) {
-  .row {
-    justify-content: space-between;
-  }
-  .box {
-    width: 45%; /* two per row */
-  }
-}
-
-/* Mobiles (max-width: 600px) */
-@media (max-width: 600px) {
-  .row {
-    flex-direction: column;
-    gap: 15px;
-  }
-  .box {
-    width: 100%; /* full width */
-  }
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
   .title {
-    font-size: 18px;
+    font-size: 1.2rem;
   }
-  .info-box .photo,
-  .team-box .team-logo {
-    width: 50px;
-    height: 50px;
+
+  .card {
+    padding: 16px;
   }
-  .owner-photo {
-    width: 30px;
-    height: 30px;
+
+  .organiser-card .avatar {
+    width: 70px;
+    height: 70px;
   }
-  .vs-title {
-    font-size: 14px;
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.1rem;
   }
+
+  .organiser-card .avatar {
+    width: 64px;
+    height: 64px;
+  }
+}
+.call-link {
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.call-link:hover {
+  color: #2563eb;
+  text-decoration: underline;
 }

@@ -28,9 +28,10 @@ $router->group(['middleware' => 'cors'], function () use ($router) {
     $router->post('/updateTeam', 'TeamController@updateTeam');
     $router->post('/giveAmount', 'TeamController@giveAmount');
     $router->post('/mypointandhistry', 'TeamController@mypointandhistry');
-    
-    
-    
+    $router->post('/assignRole', 'TeamController@assignRole');
+
+
+
     // routes/web.php or routes/api.php
 
 });

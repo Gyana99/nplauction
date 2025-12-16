@@ -1,112 +1,65 @@
 <!-- ORGANISER SECTION -->
 <div class="section">
-  <h3 class="title">organiser</h3>
-  <div class="row">
+  <h3 class="title">Organisers</h3>
 
-    <div class="box info-box">
-      <img src="https://via.placeholder.com/60" class="photo">
-      <h4 class="name">Gyana Ranjan</h4>
-      <p class="phone">📞 7205569189</p>
-    </div>
-
-    <div class="box info-box">
-      <img src="https://via.placeholder.com/60" class="photo">
-      <h4 class="name">Amit Singh</h4>
-      <p class="phone">📞 9090909090</p>
-    </div>
-
-    <div class="box info-box">
-      <img src="https://via.placeholder.com/60" class="photo">
-      <h4 class="name">Amit Singh</h4>
-      <p class="phone">📞 9090909090</p>
-    </div>
-
-    <div class="box info-box">
-      <img src="https://via.placeholder.com/60" class="photo">
-      <h4 class="name">Amit Singh</h4>
-      <p class="phone">📞 9090909090</p>
-    </div>
-
-    <div class="box info-box">
-      <img src="https://via.placeholder.com/60" class="photo">
-      <h4 class="name">Amit Singh</h4>
-      <p class="phone">📞 9090909090</p>
-    </div>
-
-    <div class="box info-box">
-      <img src="https://via.placeholder.com/60" class="photo">
-      <h4 class="name">Amit Singh</h4>
-      <p class="phone">📞 9090909090</p>
-    </div>
-
-    <div class="box info-box">
-      <img src="https://via.placeholder.com/60" class="photo">
-      <h4 class="name">Amit Singh</h4>
-      <p class="phone">📞 9090909090</p>
-    </div>
-
-    <div class="box info-box">
-      <img src="https://via.placeholder.com/60" class="photo">
-      <h4 class="name">Amit Singh</h4>
-      <p class="phone">📞 9090909090</p>
-    </div>
-
-    <div class="box info-box">
-      <img src="https://via.placeholder.com/60" class="photo">
-      <h4 class="name">Amit Singh</h4>
-      <p class="phone">📞 9090909090</p>
+  <div class="card-grid">
+    <div class="card organiser-card">
+      <img src="../../../assets/img/tukubhai.jpg" class="avatar">
+      <h4 class="name">Pradeep Pati</h4>
+      <p class="role">(Tuku Sir)</p>
+      <p class="phone">📞 <a href="tel:+918118081551" class="call-link">8118081551</a>
+      </p>
     </div>
 
 
+    <div class="card organiser-card">
+      <img src="../../../assets/img/pintu.jpg" class="avatar">
+      <h4 class="name">Chita Chandan Chinmay Ranjan Pati</h4>
+      <p class="role">(Pintu)</p>
+      <p class="phone">📞 <a href="tel:+916370190172" class="call-link">6370190172</a></p>
+    </div>
+
+    <div class="card organiser-card">
+      <img src="../../../assets/img/deepak.jpg" class="avatar">
+      <h4 class="name">Deepak Majhi</h4>
+      <p class="role">(Dipak)</p>
+      <p class="phone">📞 <a href="tel:+918118081551" class="call-link">8118081551</a></p>
+    </div>
   </div>
 </div>
-
 
 <!-- TEAM SECTION -->
-<div class="section" *ngIf="teams.length>0">
-  <h3 class="title">team</h3>
-  <div class="row">
+<div class="section" *ngIf="teams.length > 0">
+  <h3 class="title">Teams</h3>
 
-    <div *ngFor="let teamshtml of teams" class="box team-box">
-      <img [src]="path+'logo/'+teamshtml.logo" class="team-logo">
-      <h4 class="team-name">{{ teamshtml.team_name }}</h4>
+  <div class="card-grid">
+    <div *ngFor="let t of teams" class="card team-card">
+      <img [src]="path+'logo/'+t.logo" class="team-logo">
+      <h4 class="team-name">{{ t.team_name }}</h4>
 
       <div class="owner">
-        <img [src]="path+'owner/'+teamshtml.woner_image" class="owner-photo">
-        <p class="owner-name">{{ teamshtml.woner_name }}</p>
+        <img [src]="path+'owner/'+t.woner_image" class="owner-avatar">
+        <span class="owner-name">{{ t.woner_name }}</span>
       </div>
     </div>
-
-    <!-- <div class="box team-box">
-      <img src="https://via.placeholder.com/60" class="team-logo">
-      <h4 class="team-name">Red Lions</h4>
-
-      <div class="owner">
-        <img src="https://via.placeholder.com/40" class="owner-photo">
-        <p class="owner-name">Owner: Manoj</p>
-      </div>
-    </div> -->
-
   </div>
 </div>
-
 
 <!-- FIXTURE SECTION -->
 <!-- <div class="section">
-  <h3 class="title">fuxture</h3>
-  <div class="row">
+  <h3 class="title">Fixtures</h3>
 
-    <div class="box fixture-box">
+  <div class="card-grid">
+    <div class="card fixture-card">
       <h4 class="vs-title">Red Lions <span>VS</span> Blue Hawks</h4>
-      <p class="match-date">📅 25 Dec 2025</p>
-      <p class="match-time">⏰ 4:00 PM</p>
+      <p>📅 25 Dec 2025</p>
+      <p>⏰ 4:00 PM</p>
     </div>
 
-    <div class="box fixture-box">
+    <div class="card fixture-card">
       <h4 class="vs-title">Thunder Warriors <span>VS</span> Royal Tigers</h4>
-      <p class="match-date">📅 26 Dec 2025</p>
-      <p class="match-time">⏰ 3:00 PM</p>
+      <p>📅 26 Dec 2025</p>
+      <p>⏰ 3:00 PM</p>
     </div>
-
   </div>
 </div> -->

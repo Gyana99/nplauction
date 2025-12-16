@@ -1,1 +1,54 @@
-<p>makeplayingeleven works!</p>
+<div class="playing11-page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <h2>Make Playing XI</h2>
+    <button class="btn-download" (click)="downloadPDF()">
+      📄 Download PDF
+    </button>
+  </div>
+
+  <!-- INFO BAR -->
+  <div class="footer-info">
+    Selected:
+    <strong>{{ selectedPlayers.length }}</strong>
+    / 15 (Min 11)
+  </div>
+
+  <!-- PLAYER GRID -->
+  <div class="player-grid">
+    <div class="player-card" *ngFor="let player of players" [class.selected]="player.selected">
+
+      <!-- ORDER BADGE -->
+      <span class="index" *ngIf="player.selected">
+        {{ player.order }}
+      </span>
+
+      <!-- PLAYER CLICK AREA -->
+      <div (click)="toggleSelect(player)">
+        <img [src]="player.photo ? url + player.photo : 'assets/player.png'" alt="player" />
+        <h4>{{ player.name }}</h4>
+        <p>{{ player.type_of_player }}</p>
+        <div class="role-badges">
+          <span class="badge captain" *ngIf="player.player_roll == 'C'">C</span>
+          <span class="badge vice" *ngIf="player.player_roll == 'VC'">VC</span>
+          <span class="badge wk" *ngIf="player.player_roll == 'WK'">WK</span>
+          <span class="badge wk" *ngIf="player.player_roll == 'C,WK'">C,WK</span>
+          <span class="badge wk" *ngIf="player.player_roll == 'VC,WK'">VC,WK</span>
+        </div>
+      </div>
+
+      <!-- ORDER CONTROLS -->
+      <div class="order-controls" *ngIf="player.selected">
+        <button (click)="moveUp(player)" [disabled]="isFirst(player)">
+          ↑
+        </button>
+        <button (click)="moveDown(player)" [disabled]="isLast(player)">
+          ↓
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

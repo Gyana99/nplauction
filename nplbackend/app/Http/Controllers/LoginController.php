@@ -33,12 +33,12 @@ class LoginController extends Controller
                 'status' => true,
                 'message' => 'Login successful',
                 'data' => $userdata
-            ], 200); // success
+            ]); // success
         } else {
             return response()->json([
                 'status' => false,
                 'message' => 'Invalid credentials'
-            ], 401); // unauthorized
+            ]); // unauthorized
         }
     }
 }

@@ -193,7 +193,7 @@ class TeamController extends Controller
         // 3️⃣ Get total players count
         $totalPlayers = DB::table('player_registration')
             ->where('team', $teamId)
-            ->where('status',1)
+            ->where('status', 1)
             ->get();
 
         // 4️⃣ Return optimized response
@@ -202,5 +202,121 @@ class TeamController extends Controller
             'amount' => $amount,
             'total_players' => $totalPlayers
         ], 200);
+    }
+    // public function assignRole(Request $request)
+    // {
+    //     $input = $request->all();
+    //     $id = $input['id'];
+    //     $roll = $input['roll'];
+    //     $teamid = $input['teamid'];
+    //     $teamiddata = DB::table('admin')->where('id', $teamid)->first(['team_id']);
+    //     $finalteamid = $teamiddata->team_id;
+    //     $presentroll = DB::table('player_registration')
+    //         ->where('team', $finalteamid)
+    //         ->where('player_roll', $roll)
+    //         ->first();
+    //         //return $rolldata?'t':'f';
+    //     if (!$presentroll) {
+    //         DB::table('player_registration')
+    //             ->where('id', $id)
+    //             ->update([
+    //                 'player_roll'=> $roll
+    //             ]);
+    //     }
+    // }
+
+    public function assignRole(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $playerId = $request->input('id');        // player_registration.id
+            $role     = $request->input('roll');      // C | VC | WK | C,WK | VC,WK
+            $adminId  = $request->input('teamid');    // admin.id
+
+            /* 1️⃣ Get team_id */
+            $teamId = DB::table('admin')
+                ->where('id', $adminId)
+                ->value('team_id');
+
+            if (!$teamId) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Invalid team'
+                ], 404);
+            }
+
+            /* 2️⃣ Validate player */
+            $player = DB::table('player_registration')
+                ->where('id', $playerId)
+                ->where('team', $teamId)
+                ->first();
+
+            if (!$player) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Player not found in this team'
+                ], 404);
+            }
+
+            /* 3️⃣ Parse incoming role */
+            $roles = explode(',', $role); // e.g. ['C','WK']
+
+            $hasC  = in_array('C', $roles);
+            $hasVC = in_array('VC', $roles);
+            $hasWK = in_array('WK', $roles);
+
+            /* =========================
+           FULL RESET OLD ROLE HOLDERS
+        ========================== */
+
+            if ($hasC) {
+                DB::table('player_registration')
+                    ->where('team', $teamId)
+                    ->where('player_roll', 'like', '%C%')
+                    ->update(['player_roll' => 'P']);
+            }
+
+            if ($hasVC) {
+                DB::table('player_registration')
+                    ->where('team', $teamId)
+                    ->where('player_roll', 'like', '%VC%')
+                    ->update(['player_roll' => 'P']);
+            }
+
+            if ($hasWK) {
+                DB::table('player_registration')
+                    ->where('team', $teamId)
+                    ->where('player_roll', 'like', '%WK%')
+                    ->update(['player_roll' => 'P']);
+            }
+
+            /* =========================
+           ASSIGN NEW ROLE
+        ========================== */
+
+            DB::table('player_registration')
+                ->where('id', $playerId)
+                ->update([
+                    'player_roll' => $role   // EXACT role from dropdown
+                ]);
+
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Role updated successfully',
+                'player_id' => $playerId,
+                'role' => $role
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Role update failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

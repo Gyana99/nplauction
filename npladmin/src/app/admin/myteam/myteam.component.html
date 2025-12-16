@@ -1,1 +1,62 @@
-<p>myteam works!</p>
+<!-- SEARCH BAR -->
+<div class="search-container">
+  <input type="text" placeholder="Search players..." class="search-box" [(ngModel)]="searchText" />
+</div>
+
+<div class="total-count">
+  Total: <strong>{{ players.length }}</strong>
+</div>
+
+<!-- ROLE ASSIGNMENT PANEL -->
+<div class="role-assign-panel">
+
+  <!-- PLAYER SELECT -->
+  <select class="role-select" [(ngModel)]="selectedPlayerId">
+    <option value="">Select Player</option>
+    <option *ngFor="let p of players" [value]="p.id">
+      {{ p.name }}
+    </option>
+  </select>
+
+  <!-- ROLE SELECT -->
+  <select class="role-select" [(ngModel)]="selectedRole">
+    <option value="">Select Role</option>
+    <option value="C">Captain</option>
+    <option value="VC">Vice Captain</option>
+    <option value="C,WK">Captain,Wicket Keeper</option>
+    <option value="VC,WK">Vice Captain,Wicket Keeper</option>
+    <option value="WK">Wicket Keeper</option>
+  </select>
+
+  <!-- APPLY BUTTON -->
+  <button class="apply-btn" (click)="assignRole()">
+    Apply
+  </button>
+
+</div>
+
+<!-- PLAYER CARDS -->
+<div class="player-container">
+  <div class="player-card" *ngFor="let p of players | filterPlayers:searchText">
+
+    <img class="player-photo" [src]="url + p.photo" alt="{{ p.name }}" />
+
+    <div class="player-info">
+
+      <!-- ROLE BADGES -->
+      <div class="role-badges">
+        <span class="badge captain" *ngIf="p.player_roll == 'C'">C</span>
+        <span class="badge vice" *ngIf="p.player_roll == 'VC'">VC</span>
+        <span class="badge wk" *ngIf="p.player_roll == 'WK'">WK</span>
+        <span class="badge wk" *ngIf="p.player_roll == 'C,WK'">C,WK</span>
+        <span class="badge wk" *ngIf="p.player_roll == 'VC,WK'">VC,WK</span>
+      </div>
+
+      <h3 class="player-name">{{ p.name }}</h3>
+      <p class="detail"><strong>Age:</strong> {{ p.age }}</p>
+      <p class="detail"><strong>Type:</strong> {{ p.type_of_player }}</p>
+      <p class="detail"><strong>Number:</strong> {{ p.mobile_no }}</p>
+
+    </div>
+  </div>
+</div>
