@@ -26,6 +26,7 @@ class LoginController extends Controller
             ->where('password', $pass)
             ->select('id', 'userId', 'rollid')
             ->first();
+            //return $userdata;
 
         if ($userdata) {
             return response()->json([
