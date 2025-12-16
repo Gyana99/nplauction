@@ -15,6 +15,9 @@ import { AcceptedplayerComponent } from './acceptedplayer/acceptedplayer.compone
 import { TeamComponent } from './team/team.component';
 import { PointComponent } from './point/point.component';
 import { CurentauctionComponent } from './curentauction/curentauction.component';
+import { MypointComponent } from './mypoint/mypoint.component';
+import { MyteamComponent } from './myteam/myteam.component';
+import { MakeplayingelevenComponent } from './makeplayingeleven/makeplayingeleven.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { CurentauctionComponent } from './curentauction/curentauction.component'
     AcceptedplayerComponent,
     TeamComponent,
     PointComponent,
-    CurentauctionComponent
+    CurentauctionComponent,
+    MypointComponent,
+    MyteamComponent,
+    MakeplayingelevenComponent
   ],
   imports: [
     CommonModule,

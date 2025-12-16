@@ -116,7 +116,7 @@ class TeamController extends Controller
     public function giveAmount(Request $request)
     {
         $input = $request->all();
-       // return $input['id'];
+        // return $input['id'];
         //✅ Validate request
         // $request->validate([
         //     'id' => 'required|integer|exists:teams,id'
@@ -135,8 +135,8 @@ class TeamController extends Controller
         // ✅ Update amount status
         DB::table('team')->where('id', $input['id'])->update([
             'amount_status' => 1,
-            'amount'=>5000,
-            'created_by'=>$input['created_by'],
+            'amount' => 5000,
+            'created_by' => $input['created_by'],
             'updated_at' => Carbon::now()->toDateTimeString()
         ]);
 
@@ -168,5 +168,39 @@ class TeamController extends Controller
         file_put_contents($path . '/' . $fileName, $image);
 
         return  $fileName;
+    }
+    public function mypointandhistry(Request $request)
+    {
+        $id = $request->input('adminid');
+
+        // 1️⃣ Get team_id directly
+        $teamId = DB::table('admin')
+            ->where('id', $id)
+            ->value('team_id');
+
+        if (!$teamId) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Admin or Team not found'
+            ], 404);
+        }
+
+        // 2️⃣ Get team amount
+        $amount = DB::table('team')
+            ->where('id', $teamId)
+            ->value('amount');
+
+        // 3️⃣ Get total players count
+        $totalPlayers = DB::table('player_registration')
+            ->where('team', $teamId)
+            ->where('status',1)
+            ->get();
+
+        // 4️⃣ Return optimized response
+        return response()->json([
+            'status' => true,
+            'amount' => $amount,
+            'total_players' => $totalPlayers
+        ], 200);
     }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { EncryptionService } from 'src/app/services/encryption.service';
 import { environment } from 'src/environments/environment';
@@ -18,9 +19,13 @@ export class TeamComponent implements OnInit {
   editMode = false;
   editId: number | null = null;
   butt: any = 'Save';
-  constructor(private fb: FormBuilder, private CS: CommonService, private en: EncryptionService) { }
-
+  constructor(private fb: FormBuilder, private CS: CommonService, private en: EncryptionService,private Router:Router) { }
+  roll = this.en.decrypt(localStorage.getItem('roll'));
   ngOnInit(): void {
+
+    if (this.roll == '2' || this.roll == '0') {
+      this.Router.navigate(['dashboard'])
+    }
     this.initForm();
     this.loadTeams(); // API call later
     this.teamForm.patchValue({ created_by: this.en.decrypt(localStorage.getItem('id')) });

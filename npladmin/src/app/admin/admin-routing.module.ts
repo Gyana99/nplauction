@@ -9,6 +9,9 @@ import { AcceptedplayerComponent } from './acceptedplayer/acceptedplayer.compone
 import { TeamComponent } from './team/team.component';
 import { PointComponent } from './point/point.component';
 import { CurentauctionComponent } from './curentauction/curentauction.component';
+import { MypointComponent } from './mypoint/mypoint.component';
+import { MyteamComponent } from './myteam/myteam.component';
+import { MakeplayingelevenComponent } from './makeplayingeleven/makeplayingeleven.component';
 
 
 const routes: Routes = [
@@ -28,6 +31,15 @@ const routes: Routes = [
       { path: 'teams', component: TeamComponent },
       { path: 'give-points', component: PointComponent },
       { path: 'select-player', component: CurentauctionComponent },
+
+      { path: 'mypoint', component: MypointComponent },
+      { path: 'myteam', component: MyteamComponent },
+      { path: 'make11', component: MakeplayingelevenComponent },
+
+
+
+      
+
       
       
       
