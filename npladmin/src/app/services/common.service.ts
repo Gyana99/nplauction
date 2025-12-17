@@ -42,4 +42,10 @@ export class CommonService {
   assignRole(formdata:any): Observable<any>{
     return this.http.post(`${this.baseUrl}assignRole`, formdata);
   }
+  deletePlyer(formdata:any): Observable<any>{
+    return this.http.post(`${this.baseUrl}deletePlyer`, formdata);
+  }
+  updatePlayer(formdata:any): Observable<any>{
+     return this.http.post(`${this.baseUrl}updatePlayer`, formdata);
+  }
 }

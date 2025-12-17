@@ -1,0 +1,262 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
+
+.modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 420px;
+  max-width: 95%;
+  border-radius: 14px;
+  padding: 20px;
+  z-index: 1001;
+  animation: zoomIn 0.25s ease;
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .close-btn {
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+  }
+}
+
+/* Photo */
+.photo-section {
+  text-align: center;
+  margin-bottom: 15px;
+
+  img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #eee;
+  }
+
+  .upload-btn {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 13px;
+    color: #007bff;
+    cursor: pointer;
+  }
+}
+
+/* Form */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+
+  label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  input, select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+}
+
+/* GRID ROW (Fixes override issue) */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Buttons */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+
+  button {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  button[type="submit"] {
+    background: #28a745;
+    color: #fff;
+  }
+
+  .cancel {
+    background: #ddd;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .form-row {
+    grid-template-columns: 1fr; /* age & mobile stack */
+  }
+
+  .modal-box {
+    padding: 16px;
+  }
+}
+
+/* Animation */
+@keyframes zoomIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 1000;
+}
+
+.modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: 95%;
+  max-width: 650px;
+  border-radius: 16px;
+  padding: 20px;
+  z-index: 1001;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  h3 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .close-btn {
+    cursor: pointer;
+    font-size: 20px;
+    color: #999;
+  }
+}
+
+/* Photo */
+.photo-section {
+  text-align: center;
+  margin-bottom: 15px;
+
+  img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #eee;
+    margin-bottom: 8px;
+  }
+
+  .upload-btn {
+    font-size: 13px;
+    color: #007bff;
+    cursor: pointer;
+  }
+}
+
+/* Form grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 13px;
+    margin-bottom: 4px;
+    color: #555;
+  }
+
+  input,
+  select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+
+  button {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+  }
+
+  button[type="submit"] {
+    background: #28a745;
+    color: #fff;
+  }
+
+  .cancel {
+    background: #ccc;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full-width {
+    grid-column: span 1;
+  }
+}

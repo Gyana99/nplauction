@@ -12,6 +12,8 @@ import { CurentauctionComponent } from './curentauction/curentauction.component'
 import { MypointComponent } from './mypoint/mypoint.component';
 import { MyteamComponent } from './myteam/myteam.component';
 import { MakeplayingelevenComponent } from './makeplayingeleven/makeplayingeleven.component';
+import { SoldplayerComponent } from './soldplayer/soldplayer.component';
+import { UnsoldplayerComponent } from './unsoldplayer/unsoldplayer.component';
 
 
 const routes: Routes = [
@@ -31,20 +33,12 @@ const routes: Routes = [
       { path: 'teams', component: TeamComponent },
       { path: 'give-points', component: PointComponent },
       { path: 'select-player', component: CurentauctionComponent },
-
       { path: 'mypoint', component: MypointComponent },
       { path: 'myteam', component: MyteamComponent },
       { path: 'make11', component: MakeplayingelevenComponent },
+      { path: 'sold-player', component: SoldplayerComponent },
+      { path: 'unsold-player', component: UnsoldplayerComponent },
 
-
-
-      
-
-      
-      
-      
-      
-      
     ]
   }
 ];

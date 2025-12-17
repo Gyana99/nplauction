@@ -18,6 +18,9 @@ import { CurentauctionComponent } from './curentauction/curentauction.component'
 import { MypointComponent } from './mypoint/mypoint.component';
 import { MyteamComponent } from './myteam/myteam.component';
 import { MakeplayingelevenComponent } from './makeplayingeleven/makeplayingeleven.component';
+import { SharedModule } from './shared/shared.module';
+import { SoldplayerComponent } from './soldplayer/soldplayer.component';
+import { UnsoldplayerComponent } from './unsoldplayer/unsoldplayer.component';
 
 
 @NgModule({
@@ -36,13 +39,17 @@ import { MakeplayingelevenComponent } from './makeplayingeleven/makeplayingeleve
     CurentauctionComponent,
     MypointComponent,
     MyteamComponent,
-    MakeplayingelevenComponent
+    MakeplayingelevenComponent,
+    SoldplayerComponent,
+    UnsoldplayerComponent,
+
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class AdminModule { }

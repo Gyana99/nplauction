@@ -29,6 +29,9 @@ $router->group(['middleware' => 'cors'], function () use ($router) {
     $router->post('/giveAmount', 'TeamController@giveAmount');
     $router->post('/mypointandhistry', 'TeamController@mypointandhistry');
     $router->post('/assignRole', 'TeamController@assignRole');
+    $router->post('/deletePlyer', 'TeamController@deletePlyer');
+    $router->post('/updatePlayer', 'RegistrationController@updatePlayer');
+
 
 
 

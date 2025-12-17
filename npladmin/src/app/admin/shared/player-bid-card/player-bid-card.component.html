@@ -1,0 +1,30 @@
+<div class="bid-card" (click)="$event.stopPropagation()">
+
+  <!-- Player Info -->
+  <div class="player-left">
+    <img [src]="imageUrl + player.photo" alt="player" />
+
+    <div class="info">
+      <h4>{{ player.name }}</h4>
+      <p>Role: {{ player.type_of_player }}</p>
+      <p>Age: {{ player.age }}</p>
+      <p class="base">Base ₹{{ player.base_price }}</p>
+    </div>
+  </div>
+
+  <!-- Bid Section -->
+  <div class="bid-right">
+    <label>Bid Amount</label>
+
+    <div class="bid-input">
+      <input
+        type="number"
+        [(ngModel)]="bidAmount"
+        placeholder="Enter amount"
+      />
+
+      <button type="button" (click)="increase()">▲</button>
+    </div>
+  </div>
+
+</div>

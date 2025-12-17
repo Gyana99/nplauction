@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
+
+use function Laravel\Prompts\table;
 
 class TeamController extends Controller
 {
@@ -316,7 +319,60 @@ class TeamController extends Controller
                 'status' => false,
                 'message' => 'Role update failed',
                 'error' => $e->getMessage()
-            ], 500);
+            ]);
         }
     }
+    public function deletePlyer(Request $request)
+    {
+
+        DB::beginTransaction();
+
+        try {
+
+            // 🔹 Get player first
+            $player = DB::table('player_registration')
+                ->where('id', $request->id)
+                ->first();
+
+            if (!$player) {
+                DB::rollBack();
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Player not found'
+                ]);
+            }
+
+            // 🔹 Delete photo if exists
+            if (!empty($player->photo)) {
+
+                $photoPath = storage_path('uploads/playerimage/' . $player->photo);
+
+                if (File::exists($photoPath)) {
+                    File::delete($photoPath);
+                }
+            }
+
+            // 🔹 Delete DB record
+            DB::table('player_registration')
+                ->where('id', $request->id)
+                ->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Player and photo deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Failed to delete player',
+                'error' => $e->getMessage()
+            ]);
+        }
+    }
+
 }

@@ -1,3 +1,4 @@
+
 <!-- Search Bar -->
 <div class="search-container">
   <input type="text" placeholder="Search players..." class="search-box" [(ngModel)]="searchText" />
@@ -8,7 +9,7 @@
 <!-- Player Cards -->
 <div class="player-container">
 
-  <div class="player-card" *ngFor="let p of players | filterPlayers:searchText" (click)="auction(p)">
+  <div class="player-card" *ngFor="let p of players | filterPlayers:searchText">
 
     <!-- Image Wrapper -->
     <div class="photo-wrapper">
@@ -41,8 +42,4 @@
 
 
 </div>
-<app-player-bid-card
-  [player]="selectedPlayer"
-  [imageUrl]="url"
-  (bidChange)="onBidChange($event)">
-</app-player-bid-card>
+

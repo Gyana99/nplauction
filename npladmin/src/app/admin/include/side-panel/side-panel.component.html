@@ -69,7 +69,20 @@
           <span class="text">Accepted Player</span>
         </a>
       </li>
+      <li>
+          <a routerLink="/sold-player" routerLinkActive="active">
+            <span class="icon">💰</span>
+            <span class="text">Sold Player</span>
+          </a>
+        </li>
+         <li>
+          <a routerLink="/unsold-player" routerLinkActive="active">
+            <span class="icon">🚫</span>
+            <span class="text">Unsold Player</span>
+          </a>
+        </li>
     </ul>
+
     <ng-container *ngIf="roll == '1'">
 
 
@@ -97,6 +110,7 @@
             <span class="text">Select Player for Auction</span>
           </a>
         </li>
+
 
       </ul>
     </ng-container>

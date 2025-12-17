@@ -8,6 +8,7 @@ use Laravel\Lumen\Routing\Controller as BaseController;
 use Illuminate\Support\Str;
 use Exception;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\File;
 
 class RegistrationController extends Controller
 {
@@ -119,8 +120,8 @@ class RegistrationController extends Controller
         try {
             // Fetch all players
             $players = DB::table('player_registration')->orderBy('created_at', 'DESC')
-            ->orderBy('id', 'DESC')
-            ->get();
+                ->orderBy('id', 'DESC')
+                ->get();
 
             return response()->json([
                 'status'  => true,
@@ -169,6 +170,114 @@ class RegistrationController extends Controller
                 'status'  => false,
                 'message' => 'Something went wrong.',
                 'error'   => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function updatePlayer(Request $request)
+    {
+
+
+        DB::beginTransaction();
+
+        try {
+
+            // 1️⃣ Get existing player
+            $player = DB::table('player_registration')
+                ->where('id', $request->id)
+                ->first();
+
+            if (!$player) {
+                DB::rollBack();
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Player not found'
+                ], 404);
+            }
+
+            $photoName = $player->photo; // default old photo
+
+            // 2️⃣ If new photo is sent → process it
+            if (!empty($request->photo)) {
+
+                if (!preg_match('/^data:(image\/[a-zA-Z]+);base64,(.*)$/', $request->photo, $matches)) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Invalid image format'
+                    ], 422);
+                }
+
+                $mime = $matches[1];
+                $base64 = $matches[2];
+
+                $allowed = [
+                    'image/jpeg' => 'jpg',
+                    'image/jpg'  => 'jpg',
+                    'image/png'  => 'png'
+                ];
+
+                if (!isset($allowed[$mime])) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Only JPG and PNG allowed'
+                    ], 422);
+                }
+
+                // size check (5MB)
+                $decodedLength = (int)(strlen($base64) * 3 / 4);
+                if ($decodedLength > 5 * 1024 * 1024) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Image exceeds 5MB'
+                    ], 422);
+                }
+
+                $imageData = base64_decode($base64);
+
+                $destinationDir = storage_path('uploads/playerimage');
+                if (!is_dir($destinationDir)) {
+                    mkdir($destinationDir, 0755, true);
+                }
+
+                // delete old photo
+                if (!empty($player->photo)) {
+                    $oldPath = $destinationDir . '/' . $player->photo;
+                    if (File::exists($oldPath)) {
+                        File::delete($oldPath);
+                    }
+                }
+
+                // save new photo
+                $photoName = time() . '_' . Str::random(8) . '.' . $allowed[$mime];
+                file_put_contents($destinationDir . '/' . $photoName, $imageData);
+            }
+
+            // 3️⃣ Update DB
+            DB::table('player_registration')
+                ->where('id', $request->id)
+                ->update([
+                    'name' => $request->name,
+                    'mobile_no' => $request->mobile_no,
+                    'age' => $request->age,
+                    'type_of_player' => $request->type_of_player,
+                    'base_price' => $request->base_price,
+                    'photo' => $photoName,
+                    'updated_at' => Carbon::now()
+                ]);
+
+            DB::commit();
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Player updated successfully'
+            ], 200);
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Server error',
+                'error' => $e->getMessage()
             ], 500);
         }
     }
