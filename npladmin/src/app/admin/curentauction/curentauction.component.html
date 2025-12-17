@@ -8,7 +8,7 @@
 <!-- Player Cards -->
 <div class="player-container">
 
-  <div class="player-card" *ngFor="let p of players | filterPlayers:searchText" (click)="auction(p)">
+  <div class="player-card" *ngFor="let p of players | filterPlayers:searchText" (click)="openBidPopup(p)">
 
     <!-- Image Wrapper -->
     <div class="photo-wrapper">
@@ -41,8 +41,6 @@
 
 
 </div>
-<app-player-bid-card
-  [player]="selectedPlayer"
-  [imageUrl]="url"
+<app-player-bid-card *ngIf="selectedPlayer" [player]="selectedPlayer" [imageUrl]="url"
   (bidChange)="onBidChange($event)">
 </app-player-bid-card>

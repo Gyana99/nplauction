@@ -18,7 +18,7 @@ export class CurentauctionComponent {
     private en: EncryptionService,
     private Router: Router
   ) {}
-  players: any;
+  players: any=[];
   searchText: string = '';
   url = environment.apiUrl + 'storage/uploads/playerimage/';
   roll: any = this.en.decrypt(localStorage.getItem('roll'));
@@ -40,9 +40,9 @@ export class CurentauctionComponent {
       }
     });
   }
-  auction(data: any) {
-    console.log(data);
-  }
+  // auction(data: any) {
+  //   console.log(data);
+  // }
    /* 🔹 OPEN POPUP */
   openBidPopup(player: any) {
     this.selectedPlayer = { ...player }; // clone to avoid direct mutation
