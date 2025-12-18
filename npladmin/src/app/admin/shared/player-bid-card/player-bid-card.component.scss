@@ -1,39 +1,99 @@
-.bid-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 16px;
-  max-width: 420px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+.auction-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
-.player-info {
+/* CARD */
+.auction-card {
+  position: relative;
+  background: linear-gradient(145deg, #ffffff, #f3f3f3);
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 25px 60px rgba(0,0,0,.5);
+  animation: zoomIn .3s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #eee;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #e53935;
+  color: #fff;
+}
+
+/* HEADER */
+.auction-header {
+  text-align: center;
+  margin-bottom: 12px;
+
+  .tag {
+    background: #ff9800;
+    color: #000;
+    padding: 6px 14px;
+    font-weight: 700;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+}
+
+/* PLAYER */
+.player-section {
   display: flex;
   gap: 14px;
   align-items: center;
 
   img {
-    width: 90px;
-    height: 90px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
+    border: 4px solid #ff9800;
     object-fit: cover;
-    border: 3px solid #eee;
   }
 
-  .details {
-    h4 {
+  .player-meta {
+    h3 {
       margin: 0;
-      font-size: 18px;
+      font-size: 19px;
     }
 
     p {
-      margin: 3px 0;
+      margin: 2px 0;
       font-size: 14px;
       color: #444;
+    }
+
+    strong {
+      color: #e53935;
     }
   }
 }
 
-.bid-section {
+/* BID + TEAM */
+.bid-area,
+.team-area {
   margin-top: 16px;
 
   label {
@@ -42,37 +102,60 @@
   }
 }
 
-.bid-input {
+.bid-box {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   margin-top: 6px;
 
   input {
     flex: 1;
-    padding: 10px;
-    border-radius: 8px;
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 10px;
     border: 2px solid #ddd;
-    font-size: 16px;
   }
 
   button {
-    width: 44px;
-    border-radius: 8px;
+    width: 48px;
+    border-radius: 10px;
     border: none;
-    background: #28a745;
+    background: linear-gradient(135deg, #43a047, #2e7d32);
     color: #fff;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
-  }
-
-  button:hover {
-    background: #1e7e34;
   }
 }
 
-/* Responsive */
+select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+}
+
+/* FINAL BUTTON */
+.final-btn {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.final-btn:disabled {
+  background: #bbb;
+  cursor: not-allowed;
+}
+
+/* MOBILE */
 @media (max-width: 480px) {
-  .player-info {
+  .player-section {
     flex-direction: column;
     text-align: center;
   }

@@ -3,18 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommonService {
-
   private baseUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   registerPlayer(formData: any): Observable<any> {
-
     return this.http.post(`${this.baseUrl}login`, formData);
   }
   allplyer(): Observable<any> {
@@ -25,27 +22,29 @@ export class CommonService {
   }
   addTeam(formdata: any): Observable<any> {
     return this.http.post(`${this.baseUrl}addteam`, formdata);
-
   }
   viewTeam(): Observable<any> {
     return this.http.post(`${this.baseUrl}viewTeam`, null);
   }
-  updateTeam(formdata: any): Observable<any>{
+  updateTeam(formdata: any): Observable<any> {
     return this.http.post(`${this.baseUrl}updateTeam`, formdata);
   }
-  giveAmount(formdata:any): Observable<any>{
+  giveAmount(formdata: any): Observable<any> {
     return this.http.post(`${this.baseUrl}giveAmount`, formdata);
   }
-  mypointandhistry(formdata:any): Observable<any>{
+  mypointandhistry(formdata: any): Observable<any> {
     return this.http.post(`${this.baseUrl}mypointandhistry`, formdata);
   }
-  assignRole(formdata:any): Observable<any>{
+  assignRole(formdata: any): Observable<any> {
     return this.http.post(`${this.baseUrl}assignRole`, formdata);
   }
-  deletePlyer(formdata:any): Observable<any>{
+  deletePlyer(formdata: any): Observable<any> {
     return this.http.post(`${this.baseUrl}deletePlyer`, formdata);
   }
-  updatePlayer(formdata:any): Observable<any>{
-     return this.http.post(`${this.baseUrl}updatePlayer`, formdata);
+  updatePlayer(formdata: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}updatePlayer`, formdata);
+  }
+  updateBiding(formdata: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}updateBiding`, formdata);
   }
 }

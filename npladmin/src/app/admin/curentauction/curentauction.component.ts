@@ -13,12 +13,13 @@ import Swal from 'sweetalert2';
 })
 export class CurentauctionComponent {
   selectedPlayer: any;
+  showBidPopup: boolean = false;
   constructor(
     private cm: CommonService,
     private en: EncryptionService,
     private Router: Router
   ) {}
-  players: any=[];
+  players: any = [];
   searchText: string = '';
   url = environment.apiUrl + 'storage/uploads/playerimage/';
   roll: any = this.en.decrypt(localStorage.getItem('roll'));
@@ -40,27 +41,67 @@ export class CurentauctionComponent {
       }
     });
   }
-  // auction(data: any) {
-  //   console.log(data);
-  // }
-   /* 🔹 OPEN POPUP */
+  //   showBidPopup = false;
+  // selectedPlayer: any = null;
+
   openBidPopup(player: any) {
-    this.selectedPlayer = { ...player }; // clone to avoid direct mutation
+    this.selectedPlayer = player;
+    this.showBidPopup = true;
   }
 
-  /* 🔹 CLOSE POPUP */
   closeBidPopup() {
+    this.showBidPopup = false;
     this.selectedPlayer = null;
   }
 
-  /* 🔹 BID CHANGE FROM CHILD */
-  onBidChange(data: any) {
-    console.log('Bid updated:', data);
+  onFinalSold(data: any) {
+    this.cm.updateBiding(data).subscribe({
+      next: (res: any) => {
+        if (res.status) {
+          const d = res.data;
 
-    // Example: update UI or call API
-    this.selectedPlayer.base_price = data.amount;
+          Swal.fire({
+            title: '🏏 SOLD!',
+            html: `
+            <div style="font-size:16px; line-height:1.6">
+              <strong style="font-size:20px; color:#d32f2f;">
+                ${d.player_name}
+              </strong><br/>
+              joins <strong>${d.team_name}</strong><br/>
+              for <span style="color:#2e7d32; font-size:22px;">
+                ${this.formatAmount(d.bid_amount)}
+              </span>
+            </div>
+          `,
+            background: 'linear-gradient(145deg, #fff, #f9f9f9)',
+            icon: 'success',
+            showConfirmButton: true,
+            //timer: 3000,
+            backdrop: `
+            rgba(0,0,0,0.85)
+            url("https://media.giphy.com/media/l0HU7JI8T7n0pN1UQ/giphy.gif")
+            center top
+            no-repeat
+          `,
+            // didOpen: () => {
+            //   Swal.showLoading();
+            // },
+          });
 
-    // optional: close popup after bid
-    // this.closeBidPopup();
+          // refresh data
+          this.ngOnInit();
+        }
+      },
+      error: () => {
+        Swal.fire('Error', 'Auction update failed', 'error');
+      },
+    });
   }
+  formatAmount(amount: number | null | undefined): string {
+  if (amount === null || amount === undefined || isNaN(Number(amount))) {
+    return '₹0';
+  }
+
+  return '₹' + Number(amount).toLocaleString('en-IN');
+}
 }

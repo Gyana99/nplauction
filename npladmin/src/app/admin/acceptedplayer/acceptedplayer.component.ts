@@ -5,25 +5,26 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
-
-
 @Component({
-
   selector: 'app-acceptedplayer',
   templateUrl: './acceptedplayer.component.html',
   styleUrls: ['./acceptedplayer.component.scss'],
 })
 export class AcceptedplayerComponent {
-  constructor(private cm: CommonService, private en: EncryptionService,private Router:Router) {}
+  constructor(
+    private cm: CommonService,
+    private en: EncryptionService,
+    private Router: Router
+  ) {}
   players: any;
   searchText: string = '';
   url = environment.apiUrl + 'storage/uploads/playerimage/';
   roll: any = this.en.decrypt(localStorage.getItem('roll'));
   adminid: any = this.en.decrypt(localStorage.getItem('id'));
   ngOnInit(): void {
-     if (this.roll == '2' || this.roll == '0') {
-      this.Router.navigate(['dashboard']);
-    }
+    // if (this.roll == '2' || this.roll == '0') {
+    //   this.Router.navigate(['dashboard']);
+    // }
     this.allPlyer();
   }
   allPlyer() {

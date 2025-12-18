@@ -41,6 +41,11 @@
 
 
 </div>
-<app-player-bid-card *ngIf="selectedPlayer" [player]="selectedPlayer" [imageUrl]="url"
-  (bidChange)="onBidChange($event)">
+<!-- POPUP -->
+<app-player-bid-card
+  *ngIf="showBidPopup"
+  [player]="selectedPlayer"
+  [imageUrl]="url"
+  (sold)="onFinalSold($event)"
+  (closed)="closeBidPopup()">
 </app-player-bid-card>

@@ -31,13 +31,13 @@
       <td>
         <button
           class="btn inactive"
-          *ngIf="team.amount_status === 0"
+          *ngIf="team.amount_status == 0"
           (click)="giveAmount(team)">
           Give Amount
         </button>
-        
 
-        <span class="badge active" *ngIf="team.amount_status === 1">
+
+        <span class="badge active" *ngIf="team.amount_status == 1">
           Given
         </span>
       </td>

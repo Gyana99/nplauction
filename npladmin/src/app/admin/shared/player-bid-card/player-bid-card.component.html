@@ -1,30 +1,64 @@
-<div class="bid-card" (click)="$event.stopPropagation()">
+<!-- FULLSCREEN OVERLAY (NO CLICK HANDLER) -->
+<div class="auction-overlay">
 
-  <!-- Player Info -->
-  <div class="player-left">
-    <img [src]="imageUrl + player.photo" alt="player" />
+  <!-- CARD -->
+  <div class="auction-card">
 
-    <div class="info">
-      <h4>{{ player.name }}</h4>
-      <p>Role: {{ player.type_of_player }}</p>
-      <p>Age: {{ player.age }}</p>
-      <p class="base">Base ₹{{ player.base_price }}</p>
+    <!-- CLOSE BUTTON -->
+    <button class="close-btn" type="button" (click)="close()">✖</button>
+
+    <!-- HEADER -->
+    <div class="auction-header">
+      <span class="tag">LIVE AUCTION</span>
     </div>
-  </div>
 
-  <!-- Bid Section -->
-  <div class="bid-right">
-    <label>Bid Amount</label>
+    <!-- PLAYER INFO -->
+    <div class="player-section">
+      <img [src]="imageUrl + player.photo" />
 
-    <div class="bid-input">
-      <input
-        type="number"
-        [(ngModel)]="bidAmount"
-        placeholder="Enter amount"
-      />
-
-      <button type="button" (click)="increase()">▲</button>
+      <div class="player-meta">
+        <h3>{{ player.name }}</h3>
+        <p>{{ player.type_of_player }}</p>
+        <p>Age: {{ player.age }}</p>
+        <strong>Base ₹{{ player.base_price }}</strong>
+        <br>
+        <strong *ngIf="amount!=0" >Total Amount ₹{{ amount }}</strong>
+      </div>
     </div>
-  </div>
 
+    <!-- BID -->
+    <div class="bid-area">
+      <label>Bid Amount</label>
+
+      <div class="bid-box">
+        <input
+          type="number"
+          [(ngModel)]="bidAmount"
+          min="0"
+        />
+        <button type="button" (click)="increase()">▲</button>
+      </div>
+    </div>
+
+    <!-- TEAM -->
+    <div class="team-area">
+      <label>Select Team</label>
+
+      <select [(ngModel)]="selectedTeam" (change)="amountAdmin($event)">
+        <option value="0">Choose Team</option>
+        <option *ngFor="let t of teams" [value]="t.id" [attr.data-amount]="t.amount">
+          {{ t.team_name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- ACTION -->
+    <button
+      class="final-btn"
+      [disabled]="!bidAmount || !selectedTeam"
+      (click)="confirmSold()">
+      CONFIRM SOLD
+    </button>
+
+  </div>
 </div>

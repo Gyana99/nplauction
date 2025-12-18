@@ -82,7 +82,7 @@ class TeamController extends Controller
 
         /* =============================
        HANDLE LOGO
-    ============================== */
+            ============================== */
         $logo = $team->logo;
 
         if ($request->logo && str_contains($request->logo, 'base64')) {
@@ -90,8 +90,8 @@ class TeamController extends Controller
         }
 
         /* =============================
-       HANDLE OWNER IMAGE
-    ============================== */
+            HANDLE OWNER IMAGE
+            ============================== */
         $ownerImage = $team->woner_image;
 
         if ($request->woner_image && str_contains($request->woner_image, 'base64')) {
@@ -99,8 +99,8 @@ class TeamController extends Controller
         }
 
         /* =============================
-       UPDATE DATABASE
-    ============================== */
+            UPDATE DATABASE
+            ============================== */
         DB::table('team')->where('id', $request->id)->update([
             'team_name'   => $request->team_name,
             'short_name'  => $request->short_name,
@@ -374,5 +374,88 @@ class TeamController extends Controller
             ]);
         }
     }
+    function updateBiding(Request $request)
+    {
+        // $request->validate([
+        //     'player_id'  => 'required|integer',
+        //     'team_id'    => 'required|integer',
+        //     'bid_amount' => 'required|numeric|min:1'
+        // ]);
 
+        DB::beginTransaction();
+
+        try {
+            $playerId  = $request->player_id;
+            $teamId    = $request->team_id;
+            $bidAmount = $request->bid_amount;
+
+            // 🔹 Fetch player
+            $player = DB::table('player_registration')
+                ->where('id', $playerId)
+                ->lockForUpdate()
+                ->first();
+
+            if (!$player) {
+                DB::rollBack();
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Player not found'
+                ], 404);
+            }
+
+            // 🔹 Fetch team
+            $team = DB::table('team')
+                ->where('id', $teamId)
+                ->first();
+
+
+
+            if (!$team) {
+                DB::rollBack();
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Team not found'
+                ], 404);
+            }
+            $subamount = $team->amount - $bidAmount;
+            DB::table('team')
+                ->where('id', $teamId)
+                ->update([
+                    'amount' => $subamount
+                ]);
+            // 🔹 Update player with final auction result
+            DB::table('player_registration')
+                ->where('id', $playerId)
+                ->update([
+                    'occupied_price' => $bidAmount,
+                    'team'           => $teamId,
+                    'status'         => 1, // SOLD
+                    'updated_at'     => Carbon::now()->toDateTimeString()
+                ]);
+
+            DB::commit();
+
+            // ✅ Final response
+            return response()->json([
+                'status' => true,
+                'message' => 'Player sold successfully',
+                'data' => [
+                    'player_id'   => $player->id,
+                    'player_name' => $player->name,
+                    'team_id'     => $team->id,
+                    'team_name'   => $team->team_name,
+                    'bid_amount'  => $bidAmount
+                ]
+            ], 200);
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Auction failed',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
